@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "a2",
+        "engine": "mysql",
+        "script_path": "src/querys/a2.sql",
+        "conn_params": {
+            "host": "localhost",
+            "user": "root",
+            "password": "abc123**",
+            "database": "a2"
+        }
+    }
+]

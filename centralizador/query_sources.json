@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1,
+        "name": "bpoSystem",
+        "engine": "mysql",
+        "script_path": "src/querys/bpoSystem.sql",
+        "file_log": "src/log/procesados_bpoSystem.json",
+        "conn_params": {
+            "host": "localhost",
+            "user": "root",
+            "password": "abc123**",
+            "database": "bpoSystemMuestra"
+        }
+    },
+    {
+        "id": 2,
+        "name": "reclutador",
+        "engine": "mysql",
+        "script_path": "src/querys/reclutador.sql",
+        "file_log": "src/log/procesados_reclutador.json",
+        "conn_params": {
+            "host": "localhost",
+            "user": "root",
+            "password": "abc123**",
+            "database": "reclutador"
+        }
+    },
+    {
+        "id": 3,
+        "name": "mssql",
+        "engine": "mssql",
+        "script_path": "src/querys/muestra_oca_tmk.sql",
+        "file_log": "src/log/procesados_muestra_oca_tmk.json",
+        "conn_params": {
+            "host": "localhost",
+            "user": "sa",
+            "password": "abc123**",
+            "database": "muestra_oca_tmk"
+        }
+    },
+     {
+        "id": 4,
+        "name": "mssql",
+        "engine": "mssql",
+        "script_path": "src/querys/muestra_expediente.sql",
+        "file_log": "src/log/procesados_muestra_expediente.json",
+        "conn_params": {
+            "host": "localhost",
+            "user": "sa",
+            "password": "abc123**",
+            "database": "muestra_expediente"
+        }
+    },
+    {
+        "id": 5,
+        "name": "mssql",
+        "engine": "mssql",
+        "script_path": "src/querys/muestra_infornet.sql",
+        "file_log": "src/log/procesados_muestra_infornet.json",
+        "conn_params": {
+            "host": "localhost",
+            "user": "sa",
+            "password": "abc123**",
+            "database": "muestra_infornet"
+        }
+    },
+    {
+        "id": 6,
+        "name": "mssql",
+        "engine": "mssql",
+        "script_path": "src/querys/muestra_oca_sac.sql",
+        "file_log": "src/log/procesados_muestra_oca_sac.json",
+        "conn_params": {
+            "host": "localhost",
+            "user": "sa",
+            "password": "abc123**",
+            "database": "muestra_oca_sac"
+        }
+    }
+]

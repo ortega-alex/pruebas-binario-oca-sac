@@ -1,0 +1,1 @@
+{"version":3,"file":"correo.dto.js","sourceRoot":"","sources":["../../../src/busqueda/swagger/correo.dto.ts"],"names":[],"mappings":";;AAEA,wCAYC;AAdD,6DAAwD;AAExD,SAAgB,cAAc;IAC1B,OAAO,IAAA,qCAAgB,EAAC;QACpB,MAAM,EAAE,yCAAyC;QACjD,MAAM,EAAE;YACJ;gBACI,IAAI,EAAE,QAAQ;gBACd,IAAI,EAAE,QAAQ;gBACd,QAAQ,EAAE,IAAI;gBACd,WAAW,EAAE,sBAAsB;aACtC;SACJ;KACJ,CAAC,CAAC;AACP,CAAC"}
