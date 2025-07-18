@@ -26,7 +26,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             cache_manager_1.CacheModule.register({ isGlobal: true }),
-            mongoose_1.MongooseModule.forRoot(envs_1.envs.MONGO_URI, {
+            mongoose_1.MongooseModule.forRoot(envs_1.envs.MONGO_URI || 'mongodb://192.168.5.3:27017/centralizador', {
                 authSource: 'admin'
             }),
             busqueda_module_1.BusquedaModule,

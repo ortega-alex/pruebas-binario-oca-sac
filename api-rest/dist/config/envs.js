@@ -12,7 +12,7 @@ const { error, value } = envsSchema.validate(process.env);
 if (error) {
     throw new Error(`Config validation error: ${error.message}`);
 }
-const envVars = value || 'mongodb://192.168.5.3:27017/centralizador';
+const envVars = value;
 exports.envs = {
     MONGO_URI: envVars.MONGO_URI
 };
