@@ -14,6 +14,6 @@ if (error) {
 }
 const envVars = value;
 exports.envs = {
-    MONGO_URI: envVars.MONGO_URI
+    MONGO_URI: envVars.MONGO_URI || 'mongodb://192.168.5.3:27017/centralizador'
 };
 //# sourceMappingURL=envs.js.map
