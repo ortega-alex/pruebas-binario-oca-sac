@@ -13,6 +13,7 @@ exports.DetencionSchema = exports.Detencion = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Detencion = class Detencion {
+    uuid;
     documento;
     fecha;
     motivo;
@@ -24,6 +25,11 @@ let Detencion = class Detencion {
     fecha_ingreso_oca;
 };
 exports.Detencion = Detencion;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Detencion.prototype, "uuid", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ required: true }),

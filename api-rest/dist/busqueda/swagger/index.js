@@ -14,10 +14,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./api-decoration.doc"), exports);
-__exportStar(require("./correo.dto"), exports);
+__exportStar(require("./correo.doc"), exports);
 __exportStar(require("./direccion.doc"), exports);
 __exportStar(require("./documento.doc"), exports);
+__exportStar(require("./names-and-address.doc"), exports);
 __exportStar(require("./nombres.doc"), exports);
 __exportStar(require("./numero-telefono.doc"), exports);
 __exportStar(require("./trabajo.doc"), exports);

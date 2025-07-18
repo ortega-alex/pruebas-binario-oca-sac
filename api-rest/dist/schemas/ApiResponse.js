@@ -9,12 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReponsePagination = exports.PersonaCorta = void 0;
+exports.MessageCountRespose = exports.ReponsePagination = exports.PersonaCorta = void 0;
 const swagger_1 = require("@nestjs/swagger");
 class PersonaCorta {
     dpi;
     nombre_completo;
-    genero;
     fecha_nacimiento;
     direccion;
     telefono;
@@ -28,10 +27,6 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], PersonaCorta.prototype, "nombre_completo", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
-], PersonaCorta.prototype, "genero", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Date)
@@ -72,4 +67,22 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Boolean)
 ], ReponsePagination.prototype, "has_next_page", void 0);
+class MessageCountRespose {
+    matchedCount;
+    modifiedCound;
+    message;
+}
+exports.MessageCountRespose = MessageCountRespose;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MessageCountRespose.prototype, "matchedCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MessageCountRespose.prototype, "modifiedCound", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MessageCountRespose.prototype, "message", void 0);
 //# sourceMappingURL=ApiResponse.js.map

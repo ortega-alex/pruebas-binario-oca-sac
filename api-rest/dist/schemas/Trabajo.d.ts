@@ -1,6 +1,7 @@
 import { HydratedDocument } from 'mongoose';
 export type TrabajoDocument = HydratedDocument<Trabajo>;
 export declare class Trabajo {
+    uuid: string;
     razon_social: string;
     direccion?: string;
     cargo?: string;

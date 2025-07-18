@@ -18,7 +18,7 @@ exports.NombreCompletoDto = NombreCompletoDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El nombre completo no es válido' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'El nombre completo no puede estar vacío' }),
-    (0, class_validator_1.MinLength)(10, {
+    (0, class_validator_1.MinLength)(4, {
         message: 'El nombre completo debe tener al menos 8 caracteres'
     }),
     __metadata("design:type", String)

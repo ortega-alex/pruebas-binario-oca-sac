@@ -1,6 +1,7 @@
 import { HydratedDocument } from 'mongoose';
 export type LicenciaDocument = HydratedDocument<Licencia>;
 export declare class Licencia {
+    uuid: string;
     numero: string;
     tipo?: string;
     tabla?: string;

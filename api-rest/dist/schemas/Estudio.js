@@ -13,6 +13,7 @@ exports.EstudioSchema = exports.Estudio = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Estudio = class Estudio {
+    uuid;
     entidad;
     direccion;
     grado;
@@ -22,6 +23,11 @@ let Estudio = class Estudio {
     fecha_ingreso_oca;
 };
 exports.Estudio = Estudio;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Estudio.prototype, "uuid", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ required: true }),

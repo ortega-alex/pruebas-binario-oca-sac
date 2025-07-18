@@ -1,6 +1,7 @@
 import { HydratedDocument } from 'mongoose';
 export type ReferenciaDocument = HydratedDocument<Referencia>;
 export declare class Referencia {
+    uuid: string;
     telefono: string;
     nombre?: string;
     relacion?: string;

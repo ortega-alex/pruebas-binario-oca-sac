@@ -92,8 +92,16 @@ let BusquedaController = class BusquedaController {
         this.cacheManager.set(key, result, this._CACHETIME);
         return result;
     }
-    getByCorreo(params) {
-        return this.busquedaService.getByEmail(params.correo);
+    async getByCorreo(params, query) {
+        const page = query.page || this._PAGE;
+        const limit = query.limit || this._LIMIT;
+        const key = `${params.correo}-page:${page}`;
+        const cached = await this.cacheManager.get(key);
+        if (cached)
+            return cached;
+        const result = this.busquedaService.getByEmail(params.correo, page, limit);
+        this.cacheManager.set(key, result, this._CACHETIME);
+        return result;
     }
     async getByDireccion(params, query) {
         const page = query.page || this._PAGE;
@@ -114,6 +122,39 @@ let BusquedaController = class BusquedaController {
         if (cached)
             return cached;
         const result = this.busquedaService.getByTrabajo(params.razon_social, page, limit);
+        this.cacheManager.set(key, result, this._CACHETIME);
+        return result;
+    }
+    async getByLastNameAndAddress(params, query) {
+        const page = query.page || this._PAGE;
+        const limit = query.limit || this._LIMIT;
+        const key = `${params.primer_apellido}-${params.direccion}-page:${page}`;
+        const cached = await this.cacheManager.get(key);
+        if (cached)
+            return cached;
+        const result = this.busquedaService.getByLastNameAndAddress(params.primer_apellido, params.direccion, page, limit);
+        this.cacheManager.set(key, result, this._CACHETIME);
+        return result;
+    }
+    async getBySecondSurnameAndAddress(params, query) {
+        const page = query.page || this._PAGE;
+        const limit = query.limit || this._LIMIT;
+        const key = `${params.segundo_apellido}-${params.direccion}-page:${page}`;
+        const cached = await this.cacheManager.get(key);
+        if (cached)
+            return cached;
+        const result = this.busquedaService.getBySecondSurnameAndAddress(params.segundo_apellido, params.direccion, page, limit);
+        this.cacheManager.set(key, result, this._CACHETIME);
+        return result;
+    }
+    async getBySurnameAndAddress(params, query) {
+        const page = query.page || this._PAGE;
+        const limit = query.limit || this._LIMIT;
+        const key = `${params.primer_apellido}-${params.segundo_apellido}-${params.direccion}-page:${page}`;
+        const cached = await this.cacheManager.get(key);
+        if (cached)
+            return cached;
+        const result = this.busquedaService.getBySurnameAndAddress(params.primer_apellido, params.segundo_apellido, params.direccion, page, limit);
         this.cacheManager.set(key, result, this._CACHETIME);
         return result;
     }
@@ -211,9 +252,11 @@ __decorate([
     (0, swagger_2.DocGetByCorreo)(),
     (0, common_1.Get)('correo/:correo'),
     __param(0, (0, common_1.Param)(new common_1.ValidationPipe())),
+    __param(1, (0, common_1.Query)(new common_1.ValidationPipe({ transform: true }))),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_1.CorreoDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [dto_1.CorreoDto,
+        pagination_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
 ], BusquedaController.prototype, "getByCorreo", null);
 __decorate([
     (0, swagger_2.DocGetByDireccion)(),
@@ -235,6 +278,36 @@ __decorate([
         pagination_dto_1.PaginationQueryDto]),
     __metadata("design:returntype", Promise)
 ], BusquedaController.prototype, "getByTrabajo", null);
+__decorate([
+    (0, swagger_2.DocGetByLastNameAndAddress)(),
+    (0, common_1.Get)('primer-apellido-direccion/:primer_apellido/:direccion'),
+    __param(0, (0, common_1.Param)(new common_1.ValidationPipe())),
+    __param(1, (0, common_1.Query)(new common_1.ValidationPipe({ transform: true }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [dto_1.LastNameAndAddressDto,
+        pagination_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
+], BusquedaController.prototype, "getByLastNameAndAddress", null);
+__decorate([
+    (0, swagger_2.DocGetBySecoundSurnameAndAddress)(),
+    (0, common_1.Get)('segundo-apellido-direccion/:segundo_apellido/:direccion'),
+    __param(0, (0, common_1.Param)(new common_1.ValidationPipe())),
+    __param(1, (0, common_1.Query)(new common_1.ValidationPipe({ transform: true }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [dto_1.SecondSurnameAndAddressDto,
+        pagination_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
+], BusquedaController.prototype, "getBySecondSurnameAndAddress", null);
+__decorate([
+    (0, swagger_2.DocGetBySurnameAndAddress)(),
+    (0, common_1.Get)('apellidos-direccion/:primer_apellido/:segundo_apellido/:direccion'),
+    __param(0, (0, common_1.Param)(new common_1.ValidationPipe())),
+    __param(1, (0, common_1.Query)(new common_1.ValidationPipe({ transform: true }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [dto_1.SurnameAndAddressDto,
+        pagination_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
+], BusquedaController.prototype, "getBySurnameAndAddress", null);
 exports.BusquedaController = BusquedaController = __decorate([
     (0, swagger_1.ApiTags)('busqueda'),
     (0, common_1.Controller)('busqueda'),

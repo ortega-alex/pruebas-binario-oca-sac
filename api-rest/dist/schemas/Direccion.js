@@ -13,6 +13,7 @@ exports.DireccionSchema = exports.Direccion = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Direccion = class Direccion {
+    uuid;
     direccion_completa;
     direccion_unicode;
     municipio;
@@ -28,6 +29,11 @@ let Direccion = class Direccion {
     fecha_ingreso_oca;
 };
 exports.Direccion = Direccion;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Direccion.prototype, "uuid", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ required: true }),

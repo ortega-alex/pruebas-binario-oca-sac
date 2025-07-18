@@ -16,5 +16,4 @@ const envVars = value;
 exports.envs = {
     MONGO_URI: envVars.MONGO_URI
 };
-console.log('envs', exports.envs);
 //# sourceMappingURL=envs.js.map

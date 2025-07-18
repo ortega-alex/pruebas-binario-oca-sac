@@ -13,7 +13,9 @@ exports.CorreoSchema = exports.Correo = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Correo = class Correo {
+    uuid;
     correo;
+    dominio;
     tipo;
     tabla;
     activo;
@@ -22,9 +24,19 @@ let Correo = class Correo {
 exports.Correo = Correo;
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, mongoose_1.Prop)({ required: true }),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Correo.prototype, "uuid", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, lowercase: true }),
     __metadata("design:type", String)
 ], Correo.prototype, "correo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ lowercase: true }),
+    __metadata("design:type", String)
+], Correo.prototype, "dominio", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ required: false }),
     (0, mongoose_1.Prop)(),

@@ -13,6 +13,7 @@ exports.VehiculoSchema = exports.Vehiculo = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Vehiculo = class Vehiculo {
+    uuid;
     marca;
     modelo;
     linea;
@@ -25,6 +26,11 @@ let Vehiculo = class Vehiculo {
     fecha_ingreso_oca;
 };
 exports.Vehiculo = Vehiculo;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Vehiculo.prototype, "uuid", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ required: true }),

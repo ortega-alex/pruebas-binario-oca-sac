@@ -18,7 +18,7 @@ __exportStar(require("./correo.dto"), exports);
 __exportStar(require("./create-busqueda.dto"), exports);
 __exportStar(require("./direccion.dto"), exports);
 __exportStar(require("./documento.dto"), exports);
-__exportStar(require("./index"), exports);
+__exportStar(require("./name-and-address.dto"), exports);
 __exportStar(require("./nombres.dto"), exports);
 __exportStar(require("./phone-number.dto"), exports);
 __exportStar(require("./trabajo.dto"), exports);

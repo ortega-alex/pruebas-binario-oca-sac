@@ -6,16 +6,16 @@ exports.DocGetByIgss = DocGetByIgss;
 exports.DocGetByIrtra = DocGetByIrtra;
 exports.DocGetByNit = DocGetByNit;
 exports.DocGetByPasaporte = DocGetByPasaporte;
-const api_decoration_doc_1 = require("./api-decoration.doc");
+const api_decoration_doc_1 = require("../../decorators/api-decoration.doc");
 function DocGetByDni() {
     return (0, api_decoration_doc_1.getApiDecoration)({
-        sumary: 'Obtener datos de una persona por DNI',
+        sumary: 'Obtener datos de una persona por DPI',
         params: [
             {
                 name: 'dpi',
                 type: 'string',
                 required: true,
-                description: 'DNI de la persona'
+                description: 'DPI de la persona'
             }
         ]
     });
@@ -61,7 +61,7 @@ function DocGetByIrtra() {
 }
 function DocGetByNit() {
     return (0, api_decoration_doc_1.getApiDecoration)({
-        sumary: 'Obtener datos de una persona por DNI',
+        sumary: 'Obtener datos de una persona por DPI',
         params: [
             {
                 name: 'nit',

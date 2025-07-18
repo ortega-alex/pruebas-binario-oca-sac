@@ -1,6 +1,7 @@
 import { HydratedDocument } from 'mongoose';
 export type DetencionDocument = HydratedDocument<Detencion>;
 export declare class Detencion {
+    uuid: string;
     documento: string;
     fecha?: Date;
     motivo?: string;

@@ -13,12 +13,18 @@ exports.FirmaSchema = exports.Firma = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Firma = class Firma {
+    uuid;
     url;
     tabla;
     activo;
     fecha_ingreso_oca;
 };
 exports.Firma = Firma;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Firma.prototype, "uuid", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ required: true }),

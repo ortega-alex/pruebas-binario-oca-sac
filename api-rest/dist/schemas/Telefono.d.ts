@@ -1,7 +1,9 @@
 import { HydratedDocument } from 'mongoose';
 export type TelefonoDocument = HydratedDocument<Telefono>;
 export declare class Telefono {
+    uuid: string;
     numero: string;
+    formato_original: string;
     tipo?: string;
     tabla?: string;
     compania?: string;

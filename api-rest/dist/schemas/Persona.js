@@ -64,6 +64,7 @@ let Persona = class Persona {
     fuentes;
     actualizado_global;
     lista_negra;
+    relaciones_buscadas;
 };
 exports.Persona = Persona;
 __decorate([
@@ -256,6 +257,11 @@ __decorate([
     (0, mongoose_1.Prop)({ default: false }),
     __metadata("design:type", Boolean)
 ], Persona.prototype, "lista_negra", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ default: false }),
+    __metadata("design:type", Boolean)
+], Persona.prototype, "relaciones_buscadas", void 0);
 exports.Persona = Persona = __decorate([
     (0, mongoose_1.Schema)({ collection: 'persona' })
 ], Persona);
@@ -272,8 +278,19 @@ exports.PersonaSchema.index({ primer_apellido: 1 });
 exports.PersonaSchema.index({ segundo_apellido: 1 });
 exports.PersonaSchema.index({ nombre_completo: 1 });
 exports.PersonaSchema.index({ primer_nombre: 1, primer_apellido: 1 });
+exports.PersonaSchema.index({ primer_apellido: 1, segundo_apellido: 1 });
+exports.PersonaSchema.index({ primer_apellido: 1, 'direcciones.direccion': 1 });
+exports.PersonaSchema.index({ segundo_apellido: 1, 'direcciones.direccion': 1 });
+exports.PersonaSchema.index({
+    primer_apellido: 1,
+    segundo_apellido: 1,
+    'direcciones.direccion': 1
+});
 exports.PersonaSchema.index({ 'telefonos.numero': 1 });
+exports.PersonaSchema.index({ 'telefonos.formato_original': 1 });
 exports.PersonaSchema.index({ 'correos.correo': 1 });
+exports.PersonaSchema.index({ 'correos.dominio': 1 });
+exports.PersonaSchema.index({ 'direcciones.direccion': 1 });
 exports.PersonaSchema.index({ 'direcciones.direccion': 1 });
 exports.PersonaSchema.index({ 'trabajos.razon_social': 1 });
 //# sourceMappingURL=Persona.js.map

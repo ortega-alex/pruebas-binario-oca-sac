@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocGetByTrabajo = DocGetByTrabajo;
-const api_decoration_doc_1 = require("./api-decoration.doc");
+const api_decoration_doc_1 = require("../../decorators/api-decoration.doc");
 function DocGetByTrabajo() {
     return (0, api_decoration_doc_1.getApiDecoration)({
         sumary: 'Obtener datos de una persona por trabajo',

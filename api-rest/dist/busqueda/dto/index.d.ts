@@ -2,7 +2,7 @@ export * from './correo.dto';
 export * from './create-busqueda.dto';
 export * from './direccion.dto';
 export * from './documento.dto';
-export * from './index';
+export * from './name-and-address.dto';
 export * from './nombres.dto';
 export * from './phone-number.dto';
 export * from './trabajo.dto';

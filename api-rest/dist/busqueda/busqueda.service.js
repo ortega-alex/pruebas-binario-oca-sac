@@ -8,89 +8,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BusquedaService = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
-const mongoose_2 = require("mongoose");
-const Persona_1 = require("../schemas/Persona");
+const persona_lookup_service_1 = require("../services/persona-lookup.service");
 let BusquedaService = class BusquedaService {
-    personaModel;
-    constructor(personaModel) {
-        this.personaModel = personaModel;
-    }
-    async getFindByField(field, value) {
-        return await this.personaModel.findOne({ [field]: value, lista_negra: false }).populate({
-            path: 'relaciones.persona',
-            select: 'nombre_completo dpi'
-        });
-    }
-    async getFindByFieldPagination(params, page, limit) {
-        const skip = (page - 1) * limit;
-        const queryParams = { ...params, lista_negra: false };
-        const [total, personas] = await Promise.all([
-            this.personaModel.countDocuments(queryParams),
-            this.personaModel
-                .find(queryParams)
-                .select(`
-                        dpi 
-                        nombre_completo 
-                        fecha_nacimiento
-                        genero
-                        direcciones direccion_completa direccion_actual
-                        telefonos numero activo
-                    `)
-                .skip(skip)
-                .limit(limit)
-                .lean()
-        ]);
-        const results = personas.map(persona => {
-            const direccion = persona.direcciones?.find(d => d.direccion_actual) ||
-                persona.direcciones?.[0] ||
-                null;
-            const telefono = persona.telefonos?.find(t => t.activo) ||
-                persona.telefonos?.[0] ||
-                null;
-            return {
-                dpi: persona.dpi,
-                nombre_completo: persona.nombre_completo,
-                genero: persona.genero,
-                fecha_nacimiento: persona.fecha_nacimiento,
-                direccion: direccion?.direccion_completa,
-                telefono: telefono?.numero
-            };
-        });
-        return {
-            data: results,
-            total,
-            page,
-            limit,
-            has_next_page: page * limit < total
-        };
+    personaLookupService;
+    constructor(personaLookupService) {
+        this.personaLookupService = personaLookupService;
     }
     async getByDni(dpi) {
-        return await this.getFindByField('dpi', dpi);
+        return await this.personaLookupService.getFindByField('dpi', dpi);
     }
     async getByNit(nit) {
-        return await this.getFindByField('nit', nit);
+        return await this.personaLookupService.getFindByField('nit', nit);
     }
     async getByIgss(igss) {
-        return await this.getFindByField('igss', igss);
+        return await this.personaLookupService.getFindByField('igss', igss);
     }
     async getByIrtra(irtra) {
-        return await this.getFindByField('irtra', irtra);
+        return await this.personaLookupService.getFindByField('irtra', irtra);
     }
     async getByCedula(cedula) {
-        return await this.getFindByField('cedula', cedula);
+        return await this.personaLookupService.getFindByField('cedula', cedula);
     }
     async getByPasaporte(pasaporte) {
-        return await this.getFindByField('pasaporte', pasaporte);
+        return await this.personaLookupService.getFindByField('pasaporte', pasaporte);
     }
     async getByFullName(nombre_completo, page, limit) {
-        return await this.getFindByFieldPagination({
+        return await this.personaLookupService.getFindByFieldPagination({
             nombre_completo: {
                 $regex: nombre_completo.split(' ').join('.*'),
                 $options: 'i'
@@ -98,7 +44,7 @@ let BusquedaService = class BusquedaService {
         }, page, limit);
     }
     async getByFirstNameAndLastName(primer_nombre, primer_apellido, page, limit) {
-        return await this.getFindByFieldPagination({
+        return await this.personaLookupService.getFindByFieldPagination({
             primer_nombre: { $regex: `^${primer_nombre}`, $options: 'i' },
             primer_apellido: {
                 $regex: `^${primer_apellido}`,
@@ -107,7 +53,7 @@ let BusquedaService = class BusquedaService {
         }, page, limit);
     }
     async getBySurnames(primer_apellido, segundo_apellido, page, limit) {
-        return await this.getFindByFieldPagination({
+        return await this.personaLookupService.getFindByFieldPagination({
             primer_apellido: {
                 $regex: `^${primer_apellido}`,
                 $options: 'i'
@@ -119,15 +65,29 @@ let BusquedaService = class BusquedaService {
         }, page, limit);
     }
     async getByPhoneNumber(numero, page, limit) {
-        return await this.getFindByFieldPagination({
-            'telefonos.numero': { $regex: numero, $options: 'i' }
+        return await this.personaLookupService.getFindByFieldPagination({
+            'telefonos.numero': { $regex: `^${numero}`, $options: 'i' }
         }, page, limit);
     }
-    async getByEmail(correo) {
-        return await this.getFindByField('correos.correo', correo);
+    async getByEmail(correo, page, limit) {
+        let params = {};
+        if (correo.startsWith('@')) {
+            params = {
+                'correos.dominio': {
+                    $regex: `^${correo.split('@')[1]}`,
+                    $options: 'i'
+                }
+            };
+        }
+        else {
+            params = {
+                'correos.correo': { $regex: `^${correo}`, $options: 'i' }
+            };
+        }
+        return await this.personaLookupService.getFindByFieldPagination(params, page, limit);
     }
     async getByAddress(direccion, page, limit) {
-        return await this.getFindByFieldPagination({
+        return await this.personaLookupService.getFindByFieldPagination({
             'direcciones.direccion_completa': {
                 $regex: direccion.split(' ').join('.*'),
                 $options: 'i'
@@ -135,9 +95,49 @@ let BusquedaService = class BusquedaService {
         }, page, limit);
     }
     async getByTrabajo(razon_social, page, limit) {
-        return await this.getFindByFieldPagination({
+        return await this.personaLookupService.getFindByFieldPagination({
             'trabajos.razon_social': {
                 $regex: razon_social.split(' ').join('.*'),
+                $options: 'i'
+            }
+        }, page, limit);
+    }
+    async getByLastNameAndAddress(primer_apellido, direccion, page, limit) {
+        return await this.personaLookupService.getFindByFieldPagination({
+            'direcciones.direccion_completa': {
+                $regex: direccion.split(' ').join('.*'),
+                $options: 'i'
+            },
+            primer_apellido: {
+                $regex: `^${primer_apellido}`,
+                $options: 'i'
+            }
+        }, page, limit);
+    }
+    async getBySecondSurnameAndAddress(segundo_apellido, direccion, page, limit) {
+        return await this.personaLookupService.getFindByFieldPagination({
+            'direcciones.direccion_completa': {
+                $regex: direccion.split(' ').join('.*'),
+                $options: 'i'
+            },
+            segundo_apellido: {
+                $regex: `^${segundo_apellido}`,
+                $options: 'i'
+            }
+        }, page, limit);
+    }
+    async getBySurnameAndAddress(primer_apellido, segundo_apellido, direccion, page, limit) {
+        return await this.personaLookupService.getFindByFieldPagination({
+            'direcciones.direccion_completa': {
+                $regex: direccion.split(' ').join('.*'),
+                $options: 'i'
+            },
+            primer_apellido: {
+                $regex: `^${primer_apellido}`,
+                $options: 'i'
+            },
+            segundo_apellido: {
+                $regex: `^${segundo_apellido}`,
                 $options: 'i'
             }
         }, page, limit);
@@ -146,7 +146,6 @@ let BusquedaService = class BusquedaService {
 exports.BusquedaService = BusquedaService;
 exports.BusquedaService = BusquedaService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(Persona_1.Persona.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __metadata("design:paramtypes", [persona_lookup_service_1.PersonaLookupService])
 ], BusquedaService);
 //# sourceMappingURL=busqueda.service.js.map

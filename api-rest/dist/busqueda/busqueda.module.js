@@ -12,6 +12,7 @@ const busqueda_service_1 = require("./busqueda.service");
 const busqueda_controller_1 = require("./busqueda.controller");
 const mongoose_1 = require("@nestjs/mongoose");
 const Persona_1 = require("../schemas/Persona");
+const persona_lookup_service_1 = require("../services/persona-lookup.service");
 let BusquedaModule = class BusquedaModule {
 };
 exports.BusquedaModule = BusquedaModule;
@@ -23,7 +24,7 @@ exports.BusquedaModule = BusquedaModule = __decorate([
             ])
         ],
         controllers: [busqueda_controller_1.BusquedaController],
-        providers: [busqueda_service_1.BusquedaService]
+        providers: [busqueda_service_1.BusquedaService, persona_lookup_service_1.PersonaLookupService]
     })
 ], BusquedaModule);
 //# sourceMappingURL=busqueda.module.js.map

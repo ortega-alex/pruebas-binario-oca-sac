@@ -1,6 +1,7 @@
 import { HydratedDocument } from 'mongoose';
 export type DireccionDocument = HydratedDocument<Direccion>;
 export declare class Direccion {
+    uuid: string;
     direccion_completa: string;
     direccion_unicode?: string;
     municipio?: string;

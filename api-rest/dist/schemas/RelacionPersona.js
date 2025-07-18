@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RelacionPersonaSchema = exports.RelacionPersona = exports.TIPOS_RELACION_PERSONA = void 0;
+exports.RelacionPersonaSchema = exports.RelacionPersona = exports.RELACION_LOGICA = exports.TIPOS_RELACION_PERSONA = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 const mongoose_2 = require("mongoose");
@@ -18,6 +18,8 @@ exports.TIPOS_RELACION_PERSONA = [
     'madre',
     'hermano',
     'hermana',
+    'hermanastro',
+    'hermanastra',
     'abuelo',
     'abuela',
     'primo',
@@ -40,6 +42,35 @@ exports.TIPOS_RELACION_PERSONA = [
     'ex',
     null
 ];
+exports.RELACION_LOGICA = {
+    padre: ['hijo', 'hija'],
+    madre: ['hijo', 'hija'],
+    hijo: ['padre', 'madre'],
+    hija: ['padre', 'madre'],
+    esposa: ['marido'],
+    marido: ['esposa'],
+    conyugue: ['conyugue'],
+    hermano: ['hermano', 'hermana'],
+    hermana: ['hermano', 'hermana'],
+    hermanastro: ['hermanastro', 'hermanastra'],
+    hermanastra: ['hermanastro', 'hermanastra'],
+    abuelo: ['nieto', 'nieta'],
+    abuela: ['nieto', 'nieta'],
+    primo: ['primo', 'prima'],
+    prima: ['primo', 'prima'],
+    tío: ['sobrino', 'sobrina'],
+    tía: ['sobrino', 'sobrina'],
+    amigo: ['amigo', 'conocido'],
+    conocido: ['amigo', 'conocido'],
+    referencia_laboral: ['referencia_laboral'],
+    nieto: ['abuelo', 'abuela'],
+    nieta: ['abuelo', 'abuela'],
+    sobrino: ['tío', 'tía'],
+    sobrina: ['tío', 'tía'],
+    abogado: ['cliente'],
+    ex: ['ex'],
+    null: [null]
+};
 let RelacionPersona = class RelacionPersona {
     persona;
     tipo_relacion;
@@ -49,7 +80,7 @@ exports.RelacionPersona = RelacionPersona;
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ type: mongoose_2.Schema.ObjectId, ref: 'Persona', required: true }),
-    __metadata("design:type", String)
+    __metadata("design:type", mongoose_2.Types.ObjectId)
 ], RelacionPersona.prototype, "persona", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ required: false }),

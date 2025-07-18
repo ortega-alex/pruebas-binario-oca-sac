@@ -7,12 +7,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const cache_manager_1 = require("@nestjs/cache-manager");
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const envs_1 = require("./config/envs");
 const busqueda_module_1 = require("./busqueda/busqueda.module");
-const cache_manager_1 = require("@nestjs/cache-manager");
+const envs_1 = require("./config/envs");
+const editar_module_1 = require("./editar/editar.module");
+const expiration_middleware_1 = require("./middleware/expiration/expiration.middleware");
+const Persona_1 = require("./schemas/Persona");
+const persona_lookup_service_1 = require("./services/persona-lookup.service");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer.apply(expiration_middleware_1.ExpirationMiddleware).forRoutes('*');
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
@@ -22,10 +29,14 @@ exports.AppModule = AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot(envs_1.envs.MONGO_URI, {
                 authSource: 'admin'
             }),
-            busqueda_module_1.BusquedaModule
+            busqueda_module_1.BusquedaModule,
+            editar_module_1.EditarModule,
+            mongoose_1.MongooseModule.forFeature([
+                { name: Persona_1.Persona.name, schema: Persona_1.PersonaSchema }
+            ])
         ],
         controllers: [],
-        providers: []
+        providers: [persona_lookup_service_1.PersonaLookupService]
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

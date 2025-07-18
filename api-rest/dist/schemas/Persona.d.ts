@@ -52,6 +52,7 @@ export declare class Persona {
     fuentes: Fuente[];
     actualizado_global: Date;
     lista_negra: boolean;
+    relaciones_buscadas: boolean;
 }
 export declare const PersonaSchema: import("mongoose").Schema<Persona, import("mongoose").Model<Persona, any, any, any, import("mongoose").Document<unknown, any, Persona, any> & Persona & {
     _id: import("mongoose").Types.ObjectId;

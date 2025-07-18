@@ -1,6 +1,7 @@
 import { HydratedDocument } from 'mongoose';
 export type FotoDocument = HydratedDocument<Foto>;
 export declare class Foto {
+    uuid: string;
     url: string;
     tabla?: string;
     activo: boolean;

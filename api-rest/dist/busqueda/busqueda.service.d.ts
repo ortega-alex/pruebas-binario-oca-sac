@@ -1,11 +1,9 @@
-import { Model } from 'mongoose';
 import { ReponsePagination } from 'src/schemas/ApiResponse';
-import { Persona, PersonaDocument } from 'src/schemas/Persona';
+import { Persona } from 'src/schemas/Persona';
+import { PersonaLookupService } from 'src/services/persona-lookup.service';
 export declare class BusquedaService {
-    private personaModel;
-    constructor(personaModel: Model<PersonaDocument>);
-    private getFindByField;
-    private getFindByFieldPagination;
+    private readonly personaLookupService;
+    constructor(personaLookupService: PersonaLookupService);
     getByDni(dpi: string): Promise<Persona | null>;
     getByNit(nit: string): Promise<Persona | null>;
     getByIgss(igss: string): Promise<Persona | null>;
@@ -16,7 +14,10 @@ export declare class BusquedaService {
     getByFirstNameAndLastName(primer_nombre: string, primer_apellido: string, page: number, limit: number): Promise<ReponsePagination>;
     getBySurnames(primer_apellido: string, segundo_apellido: string, page: number, limit: number): Promise<ReponsePagination>;
     getByPhoneNumber(numero: string, page: number, limit: number): Promise<ReponsePagination>;
-    getByEmail(correo: string): Promise<Persona | null>;
+    getByEmail(correo: string, page: number, limit: number): Promise<ReponsePagination>;
     getByAddress(direccion: string, page: number, limit: number): Promise<ReponsePagination>;
     getByTrabajo(razon_social: string, page: number, limit: number): Promise<ReponsePagination>;
+    getByLastNameAndAddress(primer_apellido: string, direccion: string, page: number, limit: number): Promise<ReponsePagination>;
+    getBySecondSurnameAndAddress(segundo_apellido: string, direccion: string, page: number, limit: number): Promise<ReponsePagination>;
+    getBySurnameAndAddress(primer_apellido: string, segundo_apellido: string, direccion: string, page: number, limit: number): Promise<ReponsePagination>;
 }

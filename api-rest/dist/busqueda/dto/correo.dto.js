@@ -16,7 +16,10 @@ class CorreoDto {
 }
 exports.CorreoDto = CorreoDto;
 __decorate([
-    (0, class_validator_1.IsEmail)({}, { message: 'El correo proporcionado no es válido' }),
+    (0, class_validator_1.IsString)({ message: 'La dirección no es válida' }),
+    (0, class_validator_1.MinLength)(5, {
+        message: 'La dirección debe tener al menos 5 caracteres'
+    }),
     __metadata("design:type", String)
 ], CorreoDto.prototype, "correo", void 0);
 //# sourceMappingURL=correo.dto.js.map

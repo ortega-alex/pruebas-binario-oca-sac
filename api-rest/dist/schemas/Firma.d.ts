@@ -1,6 +1,7 @@
 import { HydratedDocument } from 'mongoose';
 export type FirmaDocument = HydratedDocument<Firma>;
 export declare class Firma {
+    uuid: string;
     url: string;
     tabla?: string;
     activo: boolean;

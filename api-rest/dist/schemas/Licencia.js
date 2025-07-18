@@ -13,6 +13,7 @@ exports.LicenciaSchema = exports.Licencia = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Licencia = class Licencia {
+    uuid;
     numero;
     tipo;
     tabla;
@@ -20,6 +21,11 @@ let Licencia = class Licencia {
     fecha_ingreso_oca;
 };
 exports.Licencia = Licencia;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Licencia.prototype, "uuid", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ required: true }),

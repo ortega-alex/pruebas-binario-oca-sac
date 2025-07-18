@@ -13,6 +13,7 @@ exports.TrabajoSchema = exports.Trabajo = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Trabajo = class Trabajo {
+    uuid;
     razon_social;
     direccion;
     cargo;
@@ -26,6 +27,11 @@ let Trabajo = class Trabajo {
     fecha_ingreso_oca;
 };
 exports.Trabajo = Trabajo;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Trabajo.prototype, "uuid", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ required: true }),

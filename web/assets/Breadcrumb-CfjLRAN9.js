@@ -1,6 +1,0 @@
-import{l as m,r as o,j as t,R as d,L as u,p as h}from"./index-Db3ZcL0d.js";import{c as x,u as p}from"./Private-BLWMsyat.js";/**
- * @license lucide-react v0.513.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const f=[["path",{d:"m9 18 6-6-6-6",key:"mthhwq"}]],j=x("chevron-right",f),N=()=>{var l;const{searchHistoryCache:r}=p(),n=(l=m().state)==null?void 0:l.cacheId,[a,i]=o.useState([]);return o.useEffect(()=>{const e=[];let s=n;for(;s;){const c=r[s];c?(e.unshift(c),s=c.parentId):s=void 0}e.unshift({id:"home",label:"Home",uri:"/",path:`/${h.PRIVATE}/${h.SEARCH_PAGE}`,searchInput:{},response:null}),i(e)},[n,r]),t.jsx("nav",{className:"w-full flex justify-start items-center",children:t.jsx("ol",{className:"flex items-center space-x-1",children:a.map((e,s)=>t.jsxs(d.Fragment,{children:[t.jsx("li",{className:`flex items-center ${s===a.length-1?"text-primary font-semibold":"text-gray-600"}`,children:s===a.length-1?t.jsx("span",{className:"text-sm",children:e.label}):t.jsx(u,{to:e.path,state:{cacheId:e.id},className:"hover:underline flex items-center",children:t.jsx("span",{className:"text-sm",children:e.label})})}),s<a.length-1&&t.jsx(j,{className:"h-4 w-4 text-gray-500"})]},e.id))})})};export{N as B,j as C};

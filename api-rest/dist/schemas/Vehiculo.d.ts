@@ -1,6 +1,7 @@
 import { HydratedDocument } from 'mongoose';
 export type VehiculoDocument = HydratedDocument<Vehiculo>;
 export declare class Vehiculo {
+    uuid: string;
     marca: string;
     modelo?: string;
     linea?: string;

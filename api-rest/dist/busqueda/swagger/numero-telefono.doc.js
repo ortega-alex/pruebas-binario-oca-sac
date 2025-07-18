@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocGetByNumeroTelefono = DocGetByNumeroTelefono;
-const api_decoration_doc_1 = require("./api-decoration.doc");
+const api_decoration_doc_1 = require("../../decorators/api-decoration.doc");
 function DocGetByNumeroTelefono() {
     return (0, api_decoration_doc_1.getApiDecoration)({
         sumary: 'Obtener datos de una persona por Número de Teléfono',

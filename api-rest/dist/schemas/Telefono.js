@@ -13,7 +13,9 @@ exports.TelefonoSchema = exports.Telefono = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 let Telefono = class Telefono {
+    uuid;
     numero;
+    formato_original;
     tipo;
     tabla;
     compania;
@@ -24,9 +26,19 @@ let Telefono = class Telefono {
 exports.Telefono = Telefono;
 __decorate([
     (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true, unique: false }),
+    __metadata("design:type", String)
+], Telefono.prototype, "uuid", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Telefono.prototype, "numero", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Telefono.prototype, "formato_original", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ required: false }),
     (0, mongoose_1.Prop)(),

@@ -1,7 +1,9 @@
 import { HydratedDocument } from 'mongoose';
 export type CorreoDocument = HydratedDocument<Correo>;
 export declare class Correo {
+    uuid: string;
     correo: string;
+    dominio: string;
     tipo?: string;
     tabla?: string;
     activo: boolean;

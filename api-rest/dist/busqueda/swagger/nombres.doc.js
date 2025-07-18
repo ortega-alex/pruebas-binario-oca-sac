@@ -3,7 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocGetByNombreCompleto = DocGetByNombreCompleto;
 exports.DocGetByPrimerNombrePrimerApellido = DocGetByPrimerNombrePrimerApellido;
 exports.DocGetByPrimerApellidoSegundoApellido = DocGetByPrimerApellidoSegundoApellido;
-const api_decoration_doc_1 = require("./api-decoration.doc");
+const api_decoration_doc_1 = require("../../decorators/api-decoration.doc");
+const querys = [
+    {
+        name: 'page',
+        type: 'number',
+        required: false,
+        description: 'Página de la paginación'
+    },
+    {
+        name: 'limit',
+        type: 'number',
+        required: false,
+        description: 'Límite de la paginación'
+    }
+];
 function DocGetByNombreCompleto() {
     return (0, api_decoration_doc_1.getApiDecoration)({
         sumary: 'Obtener datos de una persona por Nombre Completo',
@@ -15,20 +29,7 @@ function DocGetByNombreCompleto() {
                 description: 'Nombre Completo de la persona'
             }
         ],
-        querys: [
-            {
-                name: 'page',
-                type: 'number',
-                required: false,
-                description: 'Página de la paginación'
-            },
-            {
-                name: 'limit',
-                type: 'number',
-                required: false,
-                description: 'Límite de la paginación'
-            }
-        ],
+        querys,
         multiline: true
     });
 }
@@ -49,20 +50,7 @@ function DocGetByPrimerNombrePrimerApellido() {
                 description: 'Primer Apellido de la persona'
             }
         ],
-        querys: [
-            {
-                name: 'page',
-                type: 'number',
-                required: false,
-                description: 'Página de la paginación'
-            },
-            {
-                name: 'limit',
-                type: 'number',
-                required: false,
-                description: 'Límite de la paginación'
-            }
-        ],
+        querys,
         multiline: true
     });
 }
@@ -83,20 +71,7 @@ function DocGetByPrimerApellidoSegundoApellido() {
                 description: 'Segundo Apellido de la persona'
             }
         ],
-        querys: [
-            {
-                name: 'page',
-                type: 'number',
-                required: false,
-                description: 'Página de la paginación'
-            },
-            {
-                name: 'limit',
-                type: 'number',
-                required: false,
-                description: 'Límite de la paginación'
-            }
-        ],
+        querys,
         multiline: true
     });
 }

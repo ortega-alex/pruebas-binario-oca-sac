@@ -1,7 +1,6 @@
 export declare class PersonaCorta {
     dpi: string;
     nombre_completo: string;
-    genero: string;
     fecha_nacimiento: Date;
     direccion?: string;
     telefono?: string;
@@ -12,4 +11,9 @@ export declare class ReponsePagination {
     page: number;
     limit: number;
     has_next_page: boolean;
+}
+export declare class MessageCountRespose {
+    matchedCount: number;
+    modifiedCound: number;
+    message: string;
 }
