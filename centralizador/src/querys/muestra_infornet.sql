@@ -60,7 +60,7 @@ SELECT
 			  '~tipo_relacion:' , LOWER(infp.Parentesco))
 			, '|')
 		FROM dbo.infor_parentescos infp
-		INNER JOIN muestra_oca_sac.dbo.remesas_cuentas rcu ON infp.control COLLATE Modern_Spanish_CI_AS = rcu.control COLLATE Modern_Spanish_CI_AS
+		INNER JOIN oca_sac.dbo.remesas_cuentas rcu ON infp.control COLLATE Modern_Spanish_CI_AS = rcu.control COLLATE Modern_Spanish_CI_AS
 		WHERE infp.id_infornet = inf.id_infornet
 		AND rcu.identificacion_numero IS NOT NULL
 	) AS relaciones_str,
@@ -68,7 +68,7 @@ SELECT
     null AS referencias_str,
     inf.fecha_creacion as fecha_ingreso_oca
 FROM dbo.infornet inf
-INNER JOIN muestra_oca_sac.dbo.remesas_cuentas rc ON inf.control COLLATE Modern_Spanish_CI_AS = rc.control COLLATE Modern_Spanish_CI_AS
+INNER JOIN oca_sac.dbo.remesas_cuentas rc ON inf.control COLLATE Modern_Spanish_CI_AS = rc.control COLLATE Modern_Spanish_CI_AS
 WHERE rc.identificacion_numero IS NOT NULL
 AND rc.identificacion_tipo = 'DPI'
 AND inf.fecha_creacion BETWEEN '{start}' AND '{end}';

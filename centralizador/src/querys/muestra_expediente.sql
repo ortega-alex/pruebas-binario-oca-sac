@@ -122,7 +122,7 @@ SELECT
     ) AS referencias_str,
     ebb.fecha_creacion as fecha_ingreso_oca
 FROM dbo.expedientes_bac_banco ebb
-INNER JOIN muestra_oca_sac.dbo.remesas_cuentas rc ON rc.no_cuenta = ebb.no_prestamo
+INNER JOIN oca_sac.dbo.remesas_cuentas rc ON rc.no_cuenta = ebb.no_prestamo
 WHERE rc.identificacion_numero IS NOT NULL
 AND rc.identificacion_tipo = 'DPI'
 AND ebb.fecha_creacion BETWEEN '{start}' AND '{end}';
@@ -257,7 +257,7 @@ SELECT
     ) AS referencias_str,
     ebt.fecha_creacion as fecha_ingreso_oca
 FROM dbo.expedientes_bac_tarjeta ebt
-INNER JOIN muestra_oca_sac.dbo.remesas_cuentas rc ON rc.no_cuenta = ebt.cuenta
+INNER JOIN oca_sac.dbo.remesas_cuentas rc ON rc.no_cuenta = ebt.cuenta
 WHERE rc.identificacion_numero IS NOT NULL
 AND rc.identificacion_tipo = 'DPI'
 AND ebt.fecha_creacion BETWEEN '{start}' AND '{end}';

@@ -62,8 +62,10 @@ SELECT
     null AS relaciones_str,
     null AS tipo_cliente,
     null AS referencias_str,
-    fecha_ultimo_ingreso as fecha_ingreso_oca
-FROM dbo.remesas_cuentas rc
+    r.fecha as fecha_ingreso_oca
+FROM oca_sac.dbo.remesas_cuentas rc
+INNER JOIN oca_sac.dbo.remesas r ON
+    rc.id_remesa = r.id_remesa
 WHERE identificacion_numero IS NOT NULL
 AND identificacion_tipo = 'DPI'
-AND fecha_ultimo_ingreso BETWEEN '{start}' AND '{end}';
+AND r.fecha BETWEEN '{start}' AND '{end}';

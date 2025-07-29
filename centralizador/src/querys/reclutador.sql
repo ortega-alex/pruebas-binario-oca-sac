@@ -116,7 +116,7 @@ SELECT
     semp.fecha_creacion as fecha_ingreso_oca
 FROM reclutador.solicitud_empleo semp
 LEFT JOIN reclutador.solicitud_empleo_referencias sref ON semp.id_solicitud_candidato = sref.id_solicitud_candidato
-LEFT JOIN bpoSystemMuestra.catDepartamento dep ON semp.departamento = dep.id_depto AND dep.id_pais = 1
-LEFT JOIN bpoSystemMuestra.catMunicipios mun ON semp.municipio = mun.id_muni AND dep.id_depto = mun.id_depto
+LEFT JOIN bpoSystem.catDepartamento dep ON semp.departamento = dep.id_depto AND dep.id_pais = 1
+LEFT JOIN bpoSystem.catMunicipios mun ON semp.municipio = mun.id_muni AND dep.id_depto = mun.id_depto
 WHERE semp.dpi IS NOT NULL
 AND semp.fecha_creacion BETWEEN '{start}' AND '{end}';

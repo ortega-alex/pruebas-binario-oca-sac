@@ -57,8 +57,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM abogados
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM arco WHERE DPI IS NOT NULL;
@@ -113,8 +114,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM arco
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM boleto2020 WHERE CUI IS NOT NULL;
@@ -164,56 +166,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM boleto2020
-WHERE CUI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
-
---**--
-SELECT COUNT(*) FROM dbo_movi2019 WHERE dpi IS NOT NULL;
-SELECT 
-    dpi,
-    nit AS nit,
-    null AS igss,
-    null AS irtra,
-    null AS cedula,
-    null AS pasaporte,
-    null AS primer_nombre,
-    null AS segundo_nombre,
-    null AS tercer_nombre,
-    null AS primer_apellido,
-    null AS segundo_apellido,
-    null AS apellido_casada,
-    nombre AS nombre_completo,
-    null AS fecha_nacimiento,
-    null AS estado_civil,
-    null AS grupo_sanguino,
-    null AS genero,
-    null AS nacionalidad,
-    null AS discapacidad,
-    null AS padre,
-    null AS madre,
-    null AS conyugue,
-    CONCAT(
-        'direccion_completa:', IFNULL(direccion, ''),
-        '|direccion_completa:', IFNULL(direccion1, '')
-    ) AS direcciones_srt,
-    CONCAT(
-        'numero:', IFNULL(telefono, '')
-    ) AS telefonos_str,
-    null AS correos_str,
-    null AS fotos_str,
-    null AS firmas_str,
-    null AS trabajos_str,
-    null AS detenciones_str,
-    null AS estudios_str,
-    null AS licencias_srt,
-    null AS vehiculos_srt,
-    null AS relaciones_str,
-    null AS tipo_cliente,
-    null AS referencias_str,
-    null as fecha_ingreso_oca
-FROM dbo_movi2019
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE CUI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM detenidos WHERE DPI IS NOT NULL;
@@ -264,8 +219,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM detenidos
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM distelsa WHERE DPI IS NOT NULL;
@@ -324,8 +280,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM distelsa
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM empagua WHERE dpi IS NOT NULL;
@@ -384,8 +341,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM empagua
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM formato_bases WHERE DPI IS NOT NULL;
@@ -461,8 +419,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM formato_bases
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM gallo WHERE Identificacion IS NOT NULL;
@@ -527,8 +486,9 @@ SELECT
     ) AS referencias_str,
     null as fecha_ingreso_oca
 FROM gallo
-WHERE Identificacion IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE Identificacion IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM gtpospago WHERE dpi IS NOT NULL;
@@ -584,8 +544,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM gtpospago
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM guatecomp WHERE dpi IS NOT NULL;
@@ -629,8 +590,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM guatecomp
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM igss2015 WHERE dpi IS NOT NULL;
@@ -693,8 +655,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM igss2015
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM igss2015_1 WHERE dpi IS NOT NULL;
@@ -759,8 +722,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM igss2015_1
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM irtra_afiliados WHERE DPI IS NOT NULL;
@@ -853,8 +817,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM irtra_afiliados
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM licencia WHERE dpi IS NOT NULL;
@@ -920,8 +885,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM licencia
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM lineamovi2019 WHERE dpi IS NOT NULL;
@@ -977,8 +943,9 @@ SELECT
     ) AS referencias_str,
     null as fecha_ingreso_oca
 FROM lineamovi2019
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM mineduc2015 WHERE dpi IS NOT NULL;
@@ -1038,79 +1005,14 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM mineduc2015
-WHERE dpi IS NOT NULL
+
+WHERE dpi IS NOT NULL  AND idl >= {offset}  
 GROUP BY dpi, nit, igss, irtra, cedula, pasaporte, primer_nombre, segundo_nombre, tercer_nombre, primer_apellido,
     segundo_apellido, apellido_casada, nombre_completo, fecha_nacimiento, estado_civil, grupo_sanguino, genero, 
     nacionalidad, discapacidad, padre, madre, conyugue, direcciones_srt, telefonos_str, correos_str, fotos_str, 
     firmas_str, trabajos_str, detenciones_str, estudios_str, licencias_srt, vehiculos_srt, relaciones_str, tipo_cliente
-LIMIT {limit} OFFSET {offset};
-
---**--
-
-SELECT COUNT(*) FROM nit2016 WHERE dpi IS NOT NULL;
-SELECT 
-    dpi,
-    nit,
-    null AS igss,
-    null AS irtra,
-    null AS cedula,
-    null AS pasaporte,
-    -- Extraer primer nombre del campo nombre
-    SUBSTRING_INDEX(nombre, ' ', 1) AS primer_nombre,
-    -- Intentar extraer segundo nombre
-    CASE 
-        WHEN LENGTH(nombre) - LENGTH(REPLACE(nombre, ' ', '')) >= 2 
-        THEN SUBSTRING_INDEX(SUBSTRING_INDEX(nombre, ' ', 2), ' ', -1)
-        ELSE NULL
-    END AS segundo_nombre,
-    null AS tercer_nombre,
-    -- Intentar extraer apellidos (asumiendo que los últimos dos segmentos son apellidos)
-    CASE 
-        WHEN LENGTH(nombre) - LENGTH(REPLACE(nombre, ' ', '')) >= 3
-        THEN SUBSTRING_INDEX(SUBSTRING_INDEX(nombre, ' ', -2), ' ', 1)
-        ELSE NULL
-    END AS primer_apellido,
-    CASE 
-        WHEN LENGTH(nombre) - LENGTH(REPLACE(nombre, ' ', '')) >= 3
-        THEN SUBSTRING_INDEX(nombre, ' ', -1)
-        ELSE NULL
-    END AS segundo_apellido,
-    null AS apellido_casada,
-    nombre AS nombre_completo,
-    null AS fecha_nacimiento,
-    null AS estado_civil,
-    null AS grupo_sanguino,
-    null AS genero,
-    null AS nacionalidad,
-    null AS discapacidad,
-    nombre_padre AS padre,
-    nombre_madre AS madre,
-    null AS conyugue,
-    CONCAT(
-        'direccion_completa:', IFNULL(direccion, ''),
-        '~municipio:~departamento:~colonia:~zona:~calle:~avenida:'
-    ) AS direcciones_srt,
-    null AS telefonos_str,
-    null AS correos_str,
-    CONCAT('url~', IFNULL(foto, '')) AS fotos_str,
-    null AS firmas_str,
-    null AS trabajos_str,
-    null AS detenciones_str,
-    null AS estudios_str,
-    null AS licencias_srt,
-    null AS vehiculos_srt,
-    null AS relaciones_str,
-    null AS tipo_cliente,
-    null AS referencias_str,
-    null as fecha_ingreso_oca
-FROM nit2016
-WHERE dpi IS NOT NULL
-GROUP BY dpi, nit, igss, irtra, cedula, pasaporte, primer_nombre, segundo_nombre, tercer_nombre, primer_apellido,
-    segundo_apellido, apellido_casada, nombre_completo, fecha_nacimiento, estado_civil, grupo_sanguino, genero, 
-    nacionalidad, discapacidad, padre, madre, conyugue, direcciones_srt, telefonos_str, correos_str, fotos_str, 
-    firmas_str, trabajos_str, detenciones_str, estudios_str, licencias_srt, vehiculos_srt, relaciones_str, tipo_cliente
-LIMIT {limit} OFFSET {offset};
-
+ORDER BY idl
+LIMIT {limit};
 --**--
 SELECT COUNT(*) FROM nit2021 WHERE cui IS NOT NULL;
 SELECT 
@@ -1168,8 +1070,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM nit2021
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 
@@ -1239,8 +1142,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM nit22021
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM nit32021 WHERE cui IS NOT NULL;
@@ -1309,8 +1213,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM nit32021
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM padron2019 WHERE DPI IS NOT NULL;
@@ -1364,8 +1269,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM padron2019
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM pasaporte WHERE dpi IS NOT NULL;
@@ -1447,8 +1353,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM pasaporte
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM personasnit WHERE dpi IS NOT NULL;
@@ -1534,8 +1441,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM personasnit
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM pnc WHERE dpi IS NOT NULL;
@@ -1596,8 +1504,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM pnc
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM renap WHERE CUI IS NOT NULL;
@@ -1656,8 +1565,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM renap
-WHERE CUI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE CUI IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM renap1 WHERE cui IS NOT NULL;
@@ -1707,8 +1617,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM renap1
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM representantes2021 WHERE cui IS NOT NULL;
@@ -1771,8 +1682,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM representantes2021
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 
@@ -1837,8 +1749,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM resumen
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM sat1 WHERE cui IS NOT NULL;
@@ -1898,8 +1811,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM sat1
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM sat2 WHERE cui IS NOT NULL;
@@ -1959,8 +1873,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM sat2
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM sat3 WHERE cui IS NOT NULL;
@@ -2020,8 +1935,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM sat3
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM sede WHERE dpi IS NOT NULL;
@@ -2086,8 +2002,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM sede
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM tenencia WHERE dpi IS NOT NULL;
@@ -2140,8 +2057,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM tenencia
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM tigo1 WHERE dpi IS NOT NULL;
@@ -2194,8 +2112,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM tigo1
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM tigo2 WHERE dpi IS NOT NULL;
@@ -2251,8 +2170,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM tigo2
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM tigo2016 WHERE DPI IS NOT NULL;
@@ -2305,8 +2225,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM tigo2016
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM tigo2020 WHERE DPI IS NOT NULL;
@@ -2358,8 +2279,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM tigo2020
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM tigo2022 WHERE DPI IS NOT NULL;
@@ -2412,8 +2334,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM tigo2022
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vac7m WHERE cui IS NOT NULL;
@@ -2466,8 +2389,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vac7m
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vacuna2022 WHERE cui IS NOT NULL;
@@ -2511,8 +2435,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vacuna2022
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vehi WHERE DPI IS NOT NULL;
@@ -2581,8 +2506,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vehi
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vehi2 WHERE dpi IS NOT NULL;
@@ -2641,8 +2567,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vehi2
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vehi2019 WHERE dpi IS NOT NULL;
@@ -2695,8 +2622,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vehi2019
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM visanet WHERE dpi IS NOT NULL;
@@ -2764,8 +2692,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM visanet
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM visanet2 WHERE dpi IS NOT NULL;
@@ -2811,8 +2740,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM visanet2
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM votantes2018 WHERE dpi IS NOT NULL;
@@ -2862,8 +2792,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM votantes2018
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM segeplan WHERE dpi IS NOT NULL;
@@ -2910,8 +2841,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM segeplan
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM tenencia WHERE dpi IS NOT NULL;
@@ -2964,8 +2896,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM tenencia
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM usac_1 WHERE dpi IS NOT NULL;
@@ -3027,8 +2960,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM usac_1
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vacunados WHERE cui IS NOT NULL;
@@ -3076,8 +3010,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vacunados
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vacunados3m7 WHERE cui IS NOT NULL;
@@ -3125,8 +3060,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vacunados3m7
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vacunasvincular2 WHERE cui IS NOT NULL;
@@ -3174,8 +3110,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vacunasvincular2
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 
 --**--
@@ -3224,8 +3161,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vacunavincular
-WHERE cui IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE cui IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM vehiculos09 WHERE DPI IS NOT NULL;
@@ -3288,8 +3226,9 @@ SELECT
     null AS referencias_str,
     null as fecha_ingreso_oca
 FROM vehiculos09
-WHERE DPI IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM verdefijo WHERE Identificacion IS NOT NULL;
@@ -3363,8 +3302,9 @@ SELECT
     ) AS referencias_str,
     null as fecha_ingreso_oca
 FROM verdefijo
-WHERE Identificacion IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE Identificacion IS NOT NULL  AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 
 --**--
 SELECT COUNT(*) FROM verdemovil WHERE dpi IS NOT NULL;
@@ -3437,6 +3377,7 @@ SELECT
     ) AS referencias_str,
     null as fecha_ingreso_oca
 FROM verdemovil
-WHERE dpi IS NOT NULL
-LIMIT {limit} OFFSET {offset};
+WHERE DPI IS NOT NULL AND idl >= {offset}  
+ORDER BY idl
+LIMIT {limit};
 

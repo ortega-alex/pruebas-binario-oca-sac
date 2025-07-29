@@ -279,18 +279,24 @@ exports.PersonaSchema.index({ segundo_apellido: 1 });
 exports.PersonaSchema.index({ nombre_completo: 1 });
 exports.PersonaSchema.index({ primer_nombre: 1, primer_apellido: 1 });
 exports.PersonaSchema.index({ primer_apellido: 1, segundo_apellido: 1 });
-exports.PersonaSchema.index({ primer_apellido: 1, 'direcciones.direccion': 1 });
-exports.PersonaSchema.index({ segundo_apellido: 1, 'direcciones.direccion': 1 });
+exports.PersonaSchema.index({
+    primer_apellido: 1,
+    'direcciones.direccion_completa': 1
+});
+exports.PersonaSchema.index({
+    segundo_apellido: 1,
+    'direcciones.direccion_completa': 1
+});
 exports.PersonaSchema.index({
     primer_apellido: 1,
     segundo_apellido: 1,
-    'direcciones.direccion': 1
+    'direcciones.direccion_completa': 1
 });
 exports.PersonaSchema.index({ 'telefonos.numero': 1 });
 exports.PersonaSchema.index({ 'telefonos.formato_original': 1 });
 exports.PersonaSchema.index({ 'correos.correo': 1 });
 exports.PersonaSchema.index({ 'correos.dominio': 1 });
-exports.PersonaSchema.index({ 'direcciones.direccion': 1 });
-exports.PersonaSchema.index({ 'direcciones.direccion': 1 });
+exports.PersonaSchema.index({ 'direcciones.direccion_completa': 1 });
+exports.PersonaSchema.index({ 'direcciones.direccion_completa': 1 });
 exports.PersonaSchema.index({ 'trabajos.razon_social': 1 });
 //# sourceMappingURL=Persona.js.map

@@ -41,7 +41,7 @@ SELECT
     null AS relaciones_str,
     null AS tipo_cliente,
     null AS referencias_str,
-    FECHA_CREACION as fecha_ingreso_oca
+    fecha as fecha_ingreso_oca
 FROM frm_respuestas_75
 WHERE DOCUMENTO_IDENTIDAD IS NOT NULL
 AND fecha BETWEEN '{start}' AND '{end}';
@@ -88,7 +88,7 @@ SELECT
     null AS relaciones_str,
     null AS tipo_cliente,
     null AS referencias_str,
-    FECHA_CREACION as fecha_ingreso_oca
+    fecha as fecha_ingreso_oca
 FROM frm_respuestas_83
 WHERE DOCUMENTO_IDENTIDAD IS NOT NULL
 AND fecha BETWEEN '{start}' AND '{end}';
@@ -192,7 +192,7 @@ SELECT
     null AS relaciones_str,
     null AS tipo_cliente,
     null AS referencias_str,
-    frm.fecha_creacion as fecha_ingreso_oca
+    fecha as fecha_ingreso_oca
 FROM frm_respuestas_26 frm
 LEFT JOIN catDepartamento cd ON `26X1X11` = cd.id_depto AND cd.id_pais = 1
 LEFT JOIN catMunicipios cm ON  `26X1X12` = cm.id_muni AND cd.id_depto = cm.id_depto
@@ -242,7 +242,7 @@ SELECT
     null AS relaciones_str,
     null AS tipo_cliente,
     null AS referencias_str,
-    frm.fecha_creacion as fecha_ingreso_oca
+    fecha as fecha_ingreso_oca
 FROM frm_respuestas_27 frm
 LEFT JOIN catDepartamento cd ON `27X1X8` = cd.id_depto AND cd.id_pais = 1
 LEFT JOIN catMunicipios cm ON  `27X1X9` = cm.id_muni AND cd.id_depto = cm.id_depto
@@ -291,7 +291,7 @@ SELECT
     null AS relaciones_str,
     null AS tipo_cliente,
     null AS referencias_str,
-    frm.fecha_creacion as fecha_ingreso_oca
+    fecha as fecha_ingreso_oca
 FROM frm_respuestas_29 frm
 LEFT JOIN catDepartamento cd ON `29X1X6` = cd.id_depto AND cd.id_pais = 1
 LEFT JOIN catMunicipios cm ON  `29X1X7` = cm.id_muni AND cd.id_depto = cm.id_depto
@@ -336,7 +336,7 @@ SELECT
     null AS relaciones_str,
     null AS tipo_cliente,
     null AS referencias_str,
-    FECHA_CREACION as fecha_ingreso_oca
+    fecha as fecha_ingreso_oca
 FROM frm_respuestas_74
 WHERE DOCUMENTO_IDENTIDAD IS NOT NULL
 AND fecha BETWEEN '{start}' AND '{end}';

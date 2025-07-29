@@ -65,9 +65,13 @@ let BusquedaService = class BusquedaService {
         }, page, limit);
     }
     async getByPhoneNumber(numero, page, limit) {
-        return await this.personaLookupService.getFindByFieldPagination({
-            'telefonos.numero': { $regex: `^${numero}`, $options: 'i' }
-        }, page, limit);
+        const TIMEOUT = 10000;
+        return await Promise.race([
+            this.personaLookupService.getFindByFieldPagination({
+                'telefonos.numero': { $regex: `^${numero}` }
+            }, page, limit),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), TIMEOUT))
+        ]);
     }
     async getByEmail(correo, page, limit) {
         let params = {};

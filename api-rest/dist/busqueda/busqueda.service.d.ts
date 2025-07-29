@@ -13,7 +13,7 @@ export declare class BusquedaService {
     getByFullName(nombre_completo: string, page: number, limit: number): Promise<ReponsePagination>;
     getByFirstNameAndLastName(primer_nombre: string, primer_apellido: string, page: number, limit: number): Promise<ReponsePagination>;
     getBySurnames(primer_apellido: string, segundo_apellido: string, page: number, limit: number): Promise<ReponsePagination>;
-    getByPhoneNumber(numero: string, page: number, limit: number): Promise<ReponsePagination>;
+    getByPhoneNumber(numero: string, page: number, limit: number): Promise<any>;
     getByEmail(correo: string, page: number, limit: number): Promise<ReponsePagination>;
     getByAddress(direccion: string, page: number, limit: number): Promise<ReponsePagination>;
     getByTrabajo(razon_social: string, page: number, limit: number): Promise<ReponsePagination>;
