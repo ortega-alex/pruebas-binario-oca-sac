@@ -26,6 +26,7 @@ centralizador/ # modulo centralizador ETL
 ├── query_sources.json # archivo de configuracion de consultas (sincronizacion por fechas)
 ├── README.md # instrucciones de uso
 ├── run-dates.bat # script de ejecucion de la sincronizacion por fechas para windows
+├── run-normalize.bat # permite barrer la base de datos mongo y normalizar la informacion en minúsculas
 └── run-single.bat # script de ejecucion de la sincronizacion unica para windows
 
 ```
@@ -45,6 +46,12 @@ centralizador/ # modulo centralizador ETL
     para distribuciones linux: ejecute el comando, con los parámetros necesarios
     ``` bash
         ./centralizador dates --start=2023-01-01 --end=2023-12-31 --max_workers=6
+    ```
+3. Para ejecutar la normalización de la base de datos
+    para windows: ejecutar/Modificar el archivo run-normalize.bat este se encargará de ejecutar el archivo centralizador.exe con los parámetros necesarios.
+    para distribuciones linux: ejecute el comando, con los parámetros necesarios
+    ``` bash
+        ./centralizador normalize
     ```
 
 ## Modulo api-rest

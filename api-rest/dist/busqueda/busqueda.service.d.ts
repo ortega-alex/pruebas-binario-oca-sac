@@ -3,6 +3,7 @@ import { Persona } from 'src/schemas/Persona';
 import { PersonaLookupService } from 'src/services/persona-lookup.service';
 export declare class BusquedaService {
     private readonly personaLookupService;
+    private readonly TIMEOUT;
     constructor(personaLookupService: PersonaLookupService);
     getByDni(dpi: string): Promise<Persona | null>;
     getByNit(nit: string): Promise<Persona | null>;
@@ -13,7 +14,7 @@ export declare class BusquedaService {
     getByFullName(nombre_completo: string, page: number, limit: number): Promise<ReponsePagination>;
     getByFirstNameAndLastName(primer_nombre: string, primer_apellido: string, page: number, limit: number): Promise<ReponsePagination>;
     getBySurnames(primer_apellido: string, segundo_apellido: string, page: number, limit: number): Promise<ReponsePagination>;
-    getByPhoneNumber(numero: string, page: number, limit: number): Promise<any>;
+    getByPhoneNumber(numero: string, page: number, limit: number): Promise<ReponsePagination>;
     getByEmail(correo: string, page: number, limit: number): Promise<ReponsePagination>;
     getByAddress(direccion: string, page: number, limit: number): Promise<ReponsePagination>;
     getByTrabajo(razon_social: string, page: number, limit: number): Promise<ReponsePagination>;

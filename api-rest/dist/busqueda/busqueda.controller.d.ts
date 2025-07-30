@@ -18,7 +18,7 @@ export declare class BusquedaController {
     getByNombreCompleto(params: NombreCompletoDto, query: PaginationQueryDto): Promise<{}>;
     getByPrimerNombrePrimerApellido(params: NombreApellidoDto, query: PaginationQueryDto): Promise<{}>;
     getByPrimerApellidoSegundoApellido(params: PrimerApellidoSegundoApellidoDto, query: PaginationQueryDto): Promise<{}>;
-    getByNumeroTelefono(params: PhoneNumberDto, query: PaginationQueryDto): Promise<any>;
+    getByNumeroTelefono(params: PhoneNumberDto, query: PaginationQueryDto): Promise<{}>;
     getByCorreo(params: CorreoDto, query: PaginationQueryDto): Promise<{}>;
     getByDireccion(params: DireccionDto, query: PaginationQueryDto): Promise<{}>;
     getByTrabajo(params: TrabajoDto, query: PaginationQueryDto): Promise<{}>;

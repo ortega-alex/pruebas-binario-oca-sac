@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PrimerApellidoSegundoApellidoDto = exports.NombreApellidoDto = exports.NombreCompletoDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class NombreCompletoDto {
     nombre_completo;
@@ -18,6 +19,7 @@ exports.NombreCompletoDto = NombreCompletoDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El nombre completo no es válido' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'El nombre completo no puede estar vacío' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(4, {
         message: 'El nombre completo debe tener al menos 8 caracteres'
     }),
@@ -30,11 +32,13 @@ class NombreApellidoDto {
 exports.NombreApellidoDto = NombreApellidoDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El nombre no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(3, { message: 'El nombre debe tener al menos 3 caracteres' }),
     __metadata("design:type", String)
 ], NombreApellidoDto.prototype, "primer_nombre", void 0);
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(3, { message: 'El apellido debe tener al menos 3 caracteres' }),
     __metadata("design:type", String)
 ], NombreApellidoDto.prototype, "primer_apellido", void 0);
@@ -45,6 +49,7 @@ class PrimerApellidoSegundoApellidoDto {
 exports.PrimerApellidoSegundoApellidoDto = PrimerApellidoSegundoApellidoDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El primer apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(3, {
         message: 'El primer apellido debe tener al menos 3 caracteres'
     }),
@@ -52,6 +57,7 @@ __decorate([
 ], PrimerApellidoSegundoApellidoDto.prototype, "primer_apellido", void 0);
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El segundo apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(3, {
         message: 'El segundo apellido debe tener al menos 3 caracteres'
     }),

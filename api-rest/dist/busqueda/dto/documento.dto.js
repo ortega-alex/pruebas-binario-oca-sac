@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PasaporteParamDto = exports.CedulaParamDto = exports.IrtraParamDto = exports.IgssParamDto = exports.NitParamDto = exports.DpiParamDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 const dpi_validation_1 = require("../../validations/dpi-validation");
 const nit_validation_1 = require("../../validations/nit-validation");
@@ -27,6 +28,7 @@ class NitParamDto {
 exports.NitParamDto = NitParamDto;
 __decorate([
     (0, nit_validation_1.IsNitValid)({ message: 'El NIT proporcionado no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     __metadata("design:type", String)
 ], NitParamDto.prototype, "nit", void 0);
 class IgssParamDto {
@@ -53,6 +55,7 @@ class CedulaParamDto {
 exports.CedulaParamDto = CedulaParamDto;
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'El número no puede estar vacío' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(8, { message: 'El número debe tener al menos 8 dígitos' }),
     __metadata("design:type", String)
 ], CedulaParamDto.prototype, "numero", void 0);
@@ -62,6 +65,7 @@ class PasaporteParamDto {
 exports.PasaporteParamDto = PasaporteParamDto;
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'El número no puede estar vacío' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(6, { message: 'El número debe tener al menos 6 dígitos' }),
     __metadata("design:type", String)
 ], PasaporteParamDto.prototype, "numero", void 0);

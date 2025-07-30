@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TrabajoDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class TrabajoDto {
     razon_social;
@@ -17,6 +18,7 @@ class TrabajoDto {
 exports.TrabajoDto = TrabajoDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La razón social no puede estar vacía' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(10, {
         message: 'La razón social debe tener al menos 3 caracteres'
     }),

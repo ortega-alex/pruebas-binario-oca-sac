@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SurnameAndAddressDto = exports.SecondSurnameAndAddressDto = exports.LastNameAndAddressDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class LastNameAndAddressDto {
     primer_apellido;
@@ -18,6 +19,7 @@ class LastNameAndAddressDto {
 exports.LastNameAndAddressDto = LastNameAndAddressDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El primer apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(3, {
         message: 'El primer apellido debe tener al menos 3 caracteres'
     }),
@@ -25,6 +27,7 @@ __decorate([
 ], LastNameAndAddressDto.prototype, "primer_apellido", void 0);
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La dirección no es válida' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(10, {
         message: 'La dirección debe tener al menos 10 caracteres'
     }),
@@ -37,6 +40,7 @@ class SecondSurnameAndAddressDto {
 exports.SecondSurnameAndAddressDto = SecondSurnameAndAddressDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El segundo apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(3, {
         message: 'El segundo apellido debe tener al menos 3 caracteres'
     }),
@@ -44,6 +48,7 @@ __decorate([
 ], SecondSurnameAndAddressDto.prototype, "segundo_apellido", void 0);
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La dirección no es válida' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(10, {
         message: 'La dirección debe tener al menos 10 caracteres'
     }),
@@ -57,6 +62,7 @@ class SurnameAndAddressDto {
 exports.SurnameAndAddressDto = SurnameAndAddressDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El primer apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(3, {
         message: 'El primer apellido debe tener al menos 3 caracteres'
     }),
@@ -64,6 +70,7 @@ __decorate([
 ], SurnameAndAddressDto.prototype, "primer_apellido", void 0);
 __decorate([
     (0, class_validator_1.IsString)({ message: 'El segundo apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(3, {
         message: 'El segundo apellido debe tener al menos 3 caracteres'
     }),
@@ -71,6 +78,7 @@ __decorate([
 ], SurnameAndAddressDto.prototype, "segundo_apellido", void 0);
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La dirección no es válida' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(10, {
         message: 'La dirección debe tener al menos 10 caracteres'
     }),
