@@ -23,7 +23,7 @@ const pagination_dto_1 = require("../dto/pagination.dto");
 let BusquedaController = class BusquedaController {
     busquedaService;
     cacheManager;
-    _CACHETIME = 1000 * 10;
+    _CACHETIME = 2000 * 10;
     _PAGE = 1;
     _LIMIT = 100;
     constructor(busquedaService, cacheManager) {

@@ -14,7 +14,7 @@ const common_1 = require("@nestjs/common");
 const persona_lookup_service_1 = require("../services/persona-lookup.service");
 let BusquedaService = class BusquedaService {
     personaLookupService;
-    TIMEOUT = 10000;
+    TIMEOUT = 20000;
     constructor(personaLookupService) {
         this.personaLookupService = personaLookupService;
     }
