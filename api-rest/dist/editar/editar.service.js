@@ -35,17 +35,46 @@ let EditarService = class EditarService {
         const relacion_logica = relacion_logica_array.length > 0 && genero
             ? relacion_logica_array[genero === 'M' ? 0 : 1]
             : relacion_logica_array[0];
-        persona.relaciones.push({
-            persona: persona2._id,
-            tipo_relacion
-        });
-        if (relacion_logica)
-            persona2.relaciones.push({
-                persona: persona._id,
-                tipo_relacion: relacion_logica
+        const existsMain = persona.relaciones.some(rel => rel.persona.toString() === persona2._id.toString() &&
+            rel.tipo_relacion === tipo_relacion);
+        const existsInverse = relacion_logica
+            ? persona2.relaciones.some(rel => rel.persona.toString() === persona._id.toString() &&
+                rel.tipo_relacion === relacion_logica)
+            : false;
+        if (!existsMain)
+            persona.relaciones.push({
+                persona: persona2._id,
+                tipo_relacion
             });
-        await persona.save();
-        await persona2.save();
+        if (relacion_logica && !existsInverse)
+            if (relacion_logica)
+                persona2.relaciones.push({
+                    persona: persona._id,
+                    tipo_relacion: relacion_logica
+                });
+        if (!existsMain)
+            await persona.save();
+        if (relacion_logica && !existsInverse)
+            await persona2.save();
+        return await this.personaLookupService.getFindByField('dpi', persona.dpi);
+    }
+    async removeRelation(titular_id, relacionar_id) {
+        const persona = await this.personaModel.findById(titular_id);
+        const persona2 = await this.personaModel.findById(relacionar_id);
+        if (!persona || !persona2)
+            return null;
+        const beforeCount1 = persona.relaciones.length;
+        persona.relaciones = persona.relaciones.filter(rel => rel.persona.toString() !== persona2._id.toString());
+        const afterCount1 = persona.relaciones.length;
+        const beforeCount2 = persona2.relaciones.length;
+        persona2.relaciones = persona2.relaciones.filter(rel => rel.persona.toString() !== persona._id.toString());
+        const afterCount2 = persona2.relaciones.length;
+        if (beforeCount1 !== afterCount1) {
+            await persona.save();
+        }
+        if (beforeCount2 !== afterCount2) {
+            await persona2.save();
+        }
         return await this.personaLookupService.getFindByField('dpi', persona.dpi);
     }
     async updateMultipleBlacklist(dpis, estado) {

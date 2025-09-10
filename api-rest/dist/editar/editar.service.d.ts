@@ -7,6 +7,7 @@ export declare class EditarService {
     private readonly personaLookupService;
     constructor(personaModel: Model<PersonaDocument>, personaLookupService: PersonaLookupService);
     newRelation(titular_id: string, relacionar_id: string, tipo_relacion: string, genero?: string): Promise<Persona | null>;
+    removeRelation(titular_id: string, relacionar_id: string): Promise<Persona | null>;
     updateMultipleBlacklist(dpis: string[], estado: boolean): Promise<MessageCountRespose>;
     inactivarElementoEnLista(dpi: string, listName: string, subdocumentId: string): Promise<Persona | null>;
 }

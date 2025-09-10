@@ -20,7 +20,7 @@ __decorate([
     (0, class_validator_1.IsString)({ message: 'El nombre completo no es válido' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'El nombre completo no puede estar vacío' }),
     (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
-    (0, class_validator_1.MinLength)(4, {
+    (0, class_validator_1.MinLength)(8, {
         message: 'El nombre completo debe tener al menos 8 caracteres'
     }),
     __metadata("design:type", String)

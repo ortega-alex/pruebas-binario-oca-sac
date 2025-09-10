@@ -32,35 +32,36 @@ __decorate([
     __metadata("design:type", String)
 ], NitParamDto.prototype, "nit", void 0);
 class IgssParamDto {
-    numero;
+    igss;
 }
 exports.IgssParamDto = IgssParamDto;
 __decorate([
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)({ message: 'El número no puede estar vacío' }),
     (0, class_validator_1.MinLength)(6, { message: 'El número debe tener al menos 6 dígitos' }),
     __metadata("design:type", String)
-], IgssParamDto.prototype, "numero", void 0);
+], IgssParamDto.prototype, "igss", void 0);
 class IrtraParamDto {
-    numero;
+    irtra;
 }
 exports.IrtraParamDto = IrtraParamDto;
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'El número no puede estar vacío' }),
     (0, class_validator_1.MinLength)(6, { message: 'El número debe tener al menos 6 dígitos' }),
     __metadata("design:type", String)
-], IrtraParamDto.prototype, "numero", void 0);
+], IrtraParamDto.prototype, "irtra", void 0);
 class CedulaParamDto {
-    numero;
+    cedula;
 }
 exports.CedulaParamDto = CedulaParamDto;
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'El número no puede estar vacío' }),
     (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
-    (0, class_validator_1.MinLength)(8, { message: 'El número debe tener al menos 8 dígitos' }),
+    (0, class_validator_1.MinLength)(6, { message: 'El número debe tener al menos 6 dígitos' }),
     __metadata("design:type", String)
-], CedulaParamDto.prototype, "numero", void 0);
+], CedulaParamDto.prototype, "cedula", void 0);
 class PasaporteParamDto {
-    numero;
+    pasaporte;
 }
 exports.PasaporteParamDto = PasaporteParamDto;
 __decorate([
@@ -68,5 +69,5 @@ __decorate([
     (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
     (0, class_validator_1.MinLength)(6, { message: 'El número debe tener al menos 6 dígitos' }),
     __metadata("design:type", String)
-], PasaporteParamDto.prototype, "numero", void 0);
+], PasaporteParamDto.prototype, "pasaporte", void 0);
 //# sourceMappingURL=documento.dto.js.map

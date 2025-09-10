@@ -5,14 +5,14 @@ export declare class NitParamDto {
     nit: string;
 }
 export declare class IgssParamDto {
-    numero: string;
+    igss: string;
 }
 export declare class IrtraParamDto {
-    numero: string;
+    irtra: string;
 }
 export declare class CedulaParamDto {
-    numero: string;
+    cedula: string;
 }
 export declare class PasaporteParamDto {
-    numero: string;
+    pasaporte: string;
 }

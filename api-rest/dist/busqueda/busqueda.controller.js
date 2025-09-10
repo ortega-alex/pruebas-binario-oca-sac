@@ -37,16 +37,16 @@ let BusquedaController = class BusquedaController {
         return this.busquedaService.getByNit(params.nit);
     }
     getByIgss(params) {
-        return this.busquedaService.getByIgss(params.numero);
+        return this.busquedaService.getByIgss(params.igss);
     }
     getByIrtra(params) {
-        return this.busquedaService.getByIrtra(params.numero);
+        return this.busquedaService.getByIrtra(params.irtra);
     }
     getByCedula(params) {
-        return this.busquedaService.getByCedula(params.numero);
+        return this.busquedaService.getByCedula(params.cedula);
     }
     getByPasaporte(params) {
-        return this.busquedaService.getByPasaporte(params.numero);
+        return this.busquedaService.getByPasaporte(params.pasaporte);
     }
     async getByNombreCompleto(params, query) {
         const page = query.page || this._PAGE;

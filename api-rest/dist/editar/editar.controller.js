@@ -26,6 +26,9 @@ let EditarController = class EditarController {
     async newRelation(body) {
         return this.editarService.newRelation(body.titular_id, body.relacionar_id, body.tipo_relacion, body?.genero);
     }
+    async deleteRelation(titularId, relacionarId) {
+        return this.editarService.removeRelation(titularId, relacionarId);
+    }
     async updateMultipleBlacklist(body) {
         const result = this.editarService.updateMultipleBlacklist(body.dpis, body.estado ?? true);
         return result;
@@ -43,6 +46,15 @@ __decorate([
     __metadata("design:paramtypes", [dto_1.NewRelationDto]),
     __metadata("design:returntype", Promise)
 ], EditarController.prototype, "newRelation", null);
+__decorate([
+    (0, swagger_2.DocDeleteRelation)(),
+    (0, common_1.Delete)('delete-relation/:titular_id/:relacionar_id'),
+    __param(0, (0, common_1.Param)('titular_id')),
+    __param(1, (0, common_1.Param)('relacionar_id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], EditarController.prototype, "deleteRelation", null);
 __decorate([
     (0, swagger_2.DocBlackList)(),
     (0, common_1.Patch)('lista-negra'),

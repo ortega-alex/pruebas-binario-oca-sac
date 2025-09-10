@@ -19,7 +19,7 @@ exports.TrabajoDto = TrabajoDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La razón social no puede estar vacía' }),
     (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
-    (0, class_validator_1.MinLength)(10, {
+    (0, class_validator_1.MinLength)(3, {
         message: 'La razón social debe tener al menos 3 caracteres'
     }),
     __metadata("design:type", String)

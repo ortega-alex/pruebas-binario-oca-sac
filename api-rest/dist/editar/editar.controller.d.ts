@@ -4,6 +4,7 @@ export declare class EditarController {
     private readonly editarService;
     constructor(editarService: EditarService);
     newRelation(body: NewRelationDto): Promise<import("../schemas/Persona").Persona | null>;
+    deleteRelation(titularId: string, relacionarId: string): Promise<import("../schemas/Persona").Persona | null>;
     updateMultipleBlacklist(body: BlackListDto): Promise<import("../schemas/ApiResponse").MessageCountRespose>;
     inactivarElemento(body: UpdateNestedItemDto): Promise<import("../schemas/Persona").Persona | null>;
 }
