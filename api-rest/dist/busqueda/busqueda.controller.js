@@ -81,6 +81,17 @@ let BusquedaController = class BusquedaController {
         this.cacheManager.set(key, result, this._CACHETIME);
         return result;
     }
+    async getByMarriedName(params, query) {
+        const page = query.page || this._PAGE;
+        const limit = query.limit || this._LIMIT;
+        const key = `${params.apellido_casada}-page:${page}`;
+        const cached = await this.cacheManager.get(key);
+        if (cached)
+            return cached;
+        const result = this.busquedaService.getByMarriedName(params.apellido_casada, page, limit);
+        this.cacheManager.set(key, result, this._CACHETIME);
+        return result;
+    }
     async getByNumeroTelefono(params, query) {
         const page = query.page || this._PAGE;
         const limit = query.limit || this._LIMIT;
@@ -238,6 +249,16 @@ __decorate([
         pagination_dto_1.PaginationQueryDto]),
     __metadata("design:returntype", Promise)
 ], BusquedaController.prototype, "getByPrimerApellidoSegundoApellido", null);
+__decorate([
+    (0, swagger_2.DocGetByMarriedName)(),
+    (0, common_1.Get)('apellido-casada/:apellido_casada'),
+    __param(0, (0, common_1.Param)(new common_1.ValidationPipe())),
+    __param(1, (0, common_1.Query)(new common_1.ValidationPipe({ transform: true }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [dto_1.AppellidoCasadaDto,
+        pagination_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
+], BusquedaController.prototype, "getByMarriedName", null);
 __decorate([
     (0, swagger_2.DocGetByNumeroTelefono)(),
     (0, common_1.Get)('numero-telefono/:numero'),

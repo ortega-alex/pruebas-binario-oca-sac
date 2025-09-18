@@ -1,6 +1,6 @@
 import { Cache } from '@nestjs/cache-manager';
 import { BusquedaService } from './busqueda.service';
-import { CedulaParamDto, CorreoDto, DireccionDto, DpiParamDto, IgssParamDto, IrtraParamDto, LastNameAndAddressDto, NitParamDto, NombreApellidoDto, NombreCompletoDto, PasaporteParamDto, PhoneNumberDto, PrimerApellidoSegundoApellidoDto, SecondSurnameAndAddressDto, SurnameAndAddressDto, TrabajoDto } from './dto';
+import { AppellidoCasadaDto, CedulaParamDto, CorreoDto, DireccionDto, DpiParamDto, IgssParamDto, IrtraParamDto, LastNameAndAddressDto, NitParamDto, NombreApellidoDto, NombreCompletoDto, PasaporteParamDto, PhoneNumberDto, PrimerApellidoSegundoApellidoDto, SecondSurnameAndAddressDto, SurnameAndAddressDto, TrabajoDto } from './dto';
 import { PaginationQueryDto } from 'src/dto/pagination.dto';
 export declare class BusquedaController {
     private readonly busquedaService;
@@ -18,6 +18,7 @@ export declare class BusquedaController {
     getByNombreCompleto(params: NombreCompletoDto, query: PaginationQueryDto): Promise<{}>;
     getByPrimerNombrePrimerApellido(params: NombreApellidoDto, query: PaginationQueryDto): Promise<{}>;
     getByPrimerApellidoSegundoApellido(params: PrimerApellidoSegundoApellidoDto, query: PaginationQueryDto): Promise<{}>;
+    getByMarriedName(params: AppellidoCasadaDto, query: PaginationQueryDto): Promise<{}>;
     getByNumeroTelefono(params: PhoneNumberDto, query: PaginationQueryDto): Promise<{}>;
     getByCorreo(params: CorreoDto, query: PaginationQueryDto): Promise<{}>;
     getByDireccion(params: DireccionDto, query: PaginationQueryDto): Promise<{}>;

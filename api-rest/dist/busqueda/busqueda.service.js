@@ -70,6 +70,16 @@ let BusquedaService = class BusquedaService {
             new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))
         ]);
     }
+    async getByMarriedName(apellido_casada, page, limit) {
+        return await Promise.race([
+            this.personaLookupService.getFindByFieldPagination({
+                apellido_casada: {
+                    $regex: `^${apellido_casada}`
+                }
+            }, page, limit),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))
+        ]);
+    }
     async getByPhoneNumber(numero, page, limit) {
         return await Promise.race([
             this.personaLookupService.getFindByFieldPagination({

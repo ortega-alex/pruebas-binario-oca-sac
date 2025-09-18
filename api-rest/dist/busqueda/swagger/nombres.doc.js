@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocGetByNombreCompleto = DocGetByNombreCompleto;
 exports.DocGetByPrimerNombrePrimerApellido = DocGetByPrimerNombrePrimerApellido;
 exports.DocGetByPrimerApellidoSegundoApellido = DocGetByPrimerApellidoSegundoApellido;
+exports.DocGetByMarriedName = DocGetByMarriedName;
 const api_decoration_doc_1 = require("../../decorators/api-decoration.doc");
 const querys = [
     {
@@ -69,6 +70,21 @@ function DocGetByPrimerApellidoSegundoApellido() {
                 type: 'string',
                 required: true,
                 description: 'Segundo Apellido de la persona'
+            }
+        ],
+        querys,
+        multiline: true
+    });
+}
+function DocGetByMarriedName() {
+    return (0, api_decoration_doc_1.getApiDecoration)({
+        sumary: 'Obtener datos de una persona por Apellido de Casada',
+        params: [
+            {
+                name: 'apellido_casada',
+                type: 'string',
+                required: true,
+                description: 'Appelido de Casada'
             }
         ],
         querys,

@@ -9,3 +9,6 @@ export declare class PrimerApellidoSegundoApellidoDto {
     primer_apellido: string;
     segundo_apellido: string;
 }
+export declare class AppellidoCasadaDto {
+    apellido_casada: string;
+}

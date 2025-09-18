@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PrimerApellidoSegundoApellidoDto = exports.NombreApellidoDto = exports.NombreCompletoDto = void 0;
+exports.AppellidoCasadaDto = exports.PrimerApellidoSegundoApellidoDto = exports.NombreApellidoDto = exports.NombreCompletoDto = void 0;
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class NombreCompletoDto {
@@ -63,4 +63,16 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], PrimerApellidoSegundoApellidoDto.prototype, "segundo_apellido", void 0);
+class AppellidoCasadaDto {
+    apellido_casada;
+}
+exports.AppellidoCasadaDto = AppellidoCasadaDto;
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'El apellido de casada no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
+    (0, class_validator_1.MinLength)(3, {
+        message: 'El apellido de casada debe tener al menos 3 caracteres'
+    }),
+    __metadata("design:type", String)
+], AppellidoCasadaDto.prototype, "apellido_casada", void 0);
 //# sourceMappingURL=nombres.dto.js.map

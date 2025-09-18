@@ -276,6 +276,7 @@ exports.PersonaSchema.index({ primer_nombre: 1 });
 exports.PersonaSchema.index({ segundo_nombre: 1 });
 exports.PersonaSchema.index({ primer_apellido: 1 });
 exports.PersonaSchema.index({ segundo_apellido: 1 });
+exports.PersonaSchema.index({ apellido_casado: 1 });
 exports.PersonaSchema.index({ nombre_completo: 1 });
 exports.PersonaSchema.index({ primer_nombre: 1, primer_apellido: 1 });
 exports.PersonaSchema.index({ primer_apellido: 1, segundo_apellido: 1 });
