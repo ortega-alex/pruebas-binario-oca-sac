@@ -27,6 +27,7 @@ export declare class Persona {
     segundo_apellido: string;
     apellido_casada: string;
     nombre_completo: string;
+    nombre_tokens: string[];
     fecha_nacimiento: Date;
     estado_civil: string;
     genero: string;

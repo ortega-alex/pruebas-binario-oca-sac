@@ -39,6 +39,7 @@ let Persona = class Persona {
     segundo_apellido;
     apellido_casada;
     nombre_completo;
+    nombre_tokens;
     fecha_nacimiento;
     estado_civil;
     genero;
@@ -132,6 +133,11 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Persona.prototype, "nombre_completo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [String] }),
+    (0, mongoose_1.Prop)([{ type: String }]),
+    __metadata("design:type", Array)
+], Persona.prototype, "nombre_tokens", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ required: false }),
     (0, mongoose_1.Prop)(),
@@ -276,28 +282,63 @@ exports.PersonaSchema.index({ primer_nombre: 1 });
 exports.PersonaSchema.index({ segundo_nombre: 1 });
 exports.PersonaSchema.index({ primer_apellido: 1 });
 exports.PersonaSchema.index({ segundo_apellido: 1 });
-exports.PersonaSchema.index({ apellido_casado: 1 });
+exports.PersonaSchema.index({ apellido_casada: 1 });
 exports.PersonaSchema.index({ nombre_completo: 1 });
-exports.PersonaSchema.index({ primer_nombre: 1, primer_apellido: 1 });
-exports.PersonaSchema.index({ primer_apellido: 1, segundo_apellido: 1 });
-exports.PersonaSchema.index({
-    primer_apellido: 1,
-    'direcciones.direccion_completa': 1
-});
-exports.PersonaSchema.index({
-    segundo_apellido: 1,
-    'direcciones.direccion_completa': 1
-});
-exports.PersonaSchema.index({
-    primer_apellido: 1,
-    segundo_apellido: 1,
-    'direcciones.direccion_completa': 1
-});
+exports.PersonaSchema.index({ lista_negra: 1 });
 exports.PersonaSchema.index({ 'telefonos.numero': 1 });
 exports.PersonaSchema.index({ 'telefonos.formato_original': 1 });
 exports.PersonaSchema.index({ 'correos.correo': 1 });
 exports.PersonaSchema.index({ 'correos.dominio': 1 });
 exports.PersonaSchema.index({ 'direcciones.direccion_completa': 1 });
-exports.PersonaSchema.index({ 'direcciones.direccion_completa': 1 });
+exports.PersonaSchema.index({ 'direcciones.municipio': 1 });
 exports.PersonaSchema.index({ 'trabajos.razon_social': 1 });
+exports.PersonaSchema.index({ dpi: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ nit: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ igss: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ irtra: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ cedula: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ pasaporte: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ apellido_casada: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ nombre_completo: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ 'telefonos.numero': 1, lista_negra: 1 });
+exports.PersonaSchema.index({ 'telefonos.formato_original': 1, lista_negra: 1 });
+exports.PersonaSchema.index({ 'correos.correo': 1, lista_negra: 1 });
+exports.PersonaSchema.index({ 'correos.dominio': 1, lista_negra: 1 });
+exports.PersonaSchema.index({ 'direcciones.direccion_completa': 1, lista_negra: 1 });
+exports.PersonaSchema.index({ 'direcciones.municipio': 1, lista_negra: 1 });
+exports.PersonaSchema.index({ 'trabajos.razon_social': 1, lista_negra: 1 });
+exports.PersonaSchema.index({ primer_nombre: 1, primer_apellido: 1, lista_negra: 1 });
+exports.PersonaSchema.index({
+    primer_apellido: 1,
+    segundo_apellido: 1,
+    lista_negra: 1
+});
+exports.PersonaSchema.index({
+    primer_apellido: 1,
+    'direcciones.direccion_completa': 1,
+    lista_negra: 1
+});
+exports.PersonaSchema.index({
+    segundo_apellido: 1,
+    'direcciones.direccion_completa': 1,
+    lista_negra: 1
+});
+exports.PersonaSchema.index({
+    primer_apellido: 1,
+    segundo_apellido: 1,
+    'direcciones.direccion_completa': 1,
+    lista_negra: 1
+});
+exports.PersonaSchema.index({
+    primer_apellido: 1,
+    'direcciones.municipio': 1,
+    lista_negra: 1
+});
+exports.PersonaSchema.index({
+    primer_apellido: 1,
+    'trabajos.razon_social': 1,
+    lista_negra: 1
+});
+exports.PersonaSchema.index({ nombre_tokens: 1, lista_negra: 1 });
+exports.PersonaSchema.index({ 'direcciones.direccion_tokens': 1, lista_negra: 1 });
 //# sourceMappingURL=Persona.js.map

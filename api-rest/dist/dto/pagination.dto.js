@@ -10,18 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaginationQueryDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class PaginationQueryDto {
-    page;
-    limit;
+    page = 1;
+    limit = 100;
 }
 exports.PaginationQueryDto = PaginationQueryDto;
 __decorate([
     (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => parseInt(value)),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], PaginationQueryDto.prototype, "page", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => parseInt(value)),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], PaginationQueryDto.prototype, "limit", void 0);
 //# sourceMappingURL=pagination.dto.js.map

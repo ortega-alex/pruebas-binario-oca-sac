@@ -16,6 +16,7 @@ let Direccion = class Direccion {
     uuid;
     direccion_completa;
     direccion_unicode;
+    direccion_tokens;
     municipio;
     departamento;
     colonia;
@@ -44,6 +45,11 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Direccion.prototype, "direccion_unicode", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [String] }),
+    (0, mongoose_1.Prop)([{ type: String }]),
+    __metadata("design:type", Array)
+], Direccion.prototype, "direccion_tokens", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ required: false }),
     (0, mongoose_1.Prop)(),

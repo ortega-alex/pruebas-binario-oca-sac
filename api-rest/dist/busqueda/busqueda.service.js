@@ -12,9 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BusquedaService = void 0;
 const common_1 = require("@nestjs/common");
 const persona_lookup_service_1 = require("../services/persona-lookup.service");
+const utilities_1 = require("../utilities");
 let BusquedaService = class BusquedaService {
     personaLookupService;
-    TIMEOUT = 20000;
+    TIMEOUT = 1000 * 10 * 60;
     constructor(personaLookupService) {
         this.personaLookupService = personaLookupService;
     }
@@ -30,17 +31,25 @@ let BusquedaService = class BusquedaService {
     async getByIrtra(irtra) {
         return await this.personaLookupService.getFindByField('irtra', irtra);
     }
-    async getByCedula(cedula) {
-        return await this.personaLookupService.getFindByField('cedula', cedula);
+    async getByCedula(cedula, page, limit) {
+        return await Promise.race([
+            this.personaLookupService.getFindByFieldPagination({
+                cedula: {
+                    $regex: `^${cedula.replace(/-/g, ' ').split(' ').join('.*')}`
+                }
+            }, page, limit),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))
+        ]);
     }
     async getByPasaporte(pasaporte) {
         return await this.personaLookupService.getFindByField('pasaporte', pasaporte);
     }
     async getByFullName(nombre_completo, page, limit) {
+        const normalizado = (0, utilities_1.normalizarYTokenizar)(nombre_completo);
         return await Promise.race([
             this.personaLookupService.getFindByFieldPagination({
-                nombre_completo: {
-                    $regex: nombre_completo.split(' ').join('.*')
+                nombre_tokens: {
+                    $all: normalizado
                 }
             }, page, limit),
             new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))
@@ -90,7 +99,6 @@ let BusquedaService = class BusquedaService {
     }
     async getByEmail(correo, page, limit) {
         let params = {};
-        console.log('correo', correo);
         if (correo.startsWith('@')) {
             params = {
                 'correos.dominio': {
@@ -109,12 +117,9 @@ let BusquedaService = class BusquedaService {
         ]);
     }
     async getByAddress(direccion, page, limit) {
+        const normalizado = (0, utilities_1.normalizarYTokenizar)(direccion);
         return await Promise.race([
-            this.personaLookupService.getFindByFieldPagination({
-                'direcciones.direccion_completa': {
-                    $regex: direccion.split(' ').join('.*')
-                }
-            }, page, limit),
+            this.personaLookupService.getFindByFieldPagination({ 'direcciones.direccion_tokens': { $all: normalizado } }, page, limit),
             new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))
         ]);
     }
@@ -122,18 +127,17 @@ let BusquedaService = class BusquedaService {
         return await Promise.race([
             this.personaLookupService.getFindByFieldPagination({
                 'trabajos.razon_social': {
-                    $regex: razon_social.split(' ').join('.*')
+                    $regex: `^${razon_social.split(' ').join('.*')}`
                 }
             }, page, limit),
             new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))
         ]);
     }
     async getByLastNameAndAddress(primer_apellido, direccion, page, limit) {
+        const normalizado = (0, utilities_1.normalizarYTokenizar)(direccion);
         return await Promise.race([
             this.personaLookupService.getFindByFieldPagination({
-                'direcciones.direccion_completa': {
-                    $regex: direccion.split(' ').join('.*')
-                },
+                'direcciones.direccion_tokens': { $all: normalizado },
                 primer_apellido: {
                     $regex: `^${primer_apellido}`
                 }
@@ -142,11 +146,10 @@ let BusquedaService = class BusquedaService {
         ]);
     }
     async getBySecondSurnameAndAddress(segundo_apellido, direccion, page, limit) {
+        const normalizado = (0, utilities_1.normalizarYTokenizar)(direccion);
         return await Promise.race([
             this.personaLookupService.getFindByFieldPagination({
-                'direcciones.direccion_completa': {
-                    $regex: direccion.split(' ').join('.*')
-                },
+                'direcciones.direccion_tokens': { $all: normalizado },
                 segundo_apellido: {
                     $regex: `^${segundo_apellido}`
                 }
@@ -155,16 +158,41 @@ let BusquedaService = class BusquedaService {
         ]);
     }
     async getBySurnameAndAddress(primer_apellido, segundo_apellido, direccion, page, limit) {
+        const normalizado = (0, utilities_1.normalizarYTokenizar)(direccion);
         return await Promise.race([
             this.personaLookupService.getFindByFieldPagination({
-                'direcciones.direccion_completa': {
-                    $regex: direccion.split(' ').join('.*')
-                },
+                'direcciones.direccion_tokens': { $all: normalizado },
                 primer_apellido: {
                     $regex: `^${primer_apellido}`
                 },
                 segundo_apellido: {
                     $regex: `^${segundo_apellido}`
+                }
+            }, page, limit),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))
+        ]);
+    }
+    async getLastNameAndMunicipality(primer_apellido, municipio, page, limit) {
+        return await Promise.race([
+            this.personaLookupService.getFindByFieldPagination({
+                primer_apellido: {
+                    $regex: `^${primer_apellido}`
+                },
+                'direcciones.municipio': {
+                    $regex: `^${municipio.split(' ').join('.*')}`
+                }
+            }, page, limit),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))
+        ]);
+    }
+    async getLastNameAndWork(primer_apellido, razon_social, page, limit) {
+        return await Promise.race([
+            this.personaLookupService.getFindByFieldPagination({
+                primer_apellido: {
+                    $regex: `^${primer_apellido}`
+                },
+                'empresa.razon_social': {
+                    $regex: `^${razon_social.split(' ').join('.*')}`
                 }
             }, page, limit),
             new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), this.TIMEOUT))

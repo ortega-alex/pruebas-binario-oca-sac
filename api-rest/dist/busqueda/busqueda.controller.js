@@ -16,14 +16,14 @@ exports.BusquedaController = void 0;
 const cache_manager_1 = require("@nestjs/cache-manager");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
+const pagination_dto_1 = require("../dto/pagination.dto");
 const busqueda_service_1 = require("./busqueda.service");
 const dto_1 = require("./dto");
 const swagger_2 = require("./swagger");
-const pagination_dto_1 = require("../dto/pagination.dto");
 let BusquedaController = class BusquedaController {
     busquedaService;
     cacheManager;
-    _CACHETIME = 2000 * 10;
+    _CACHETIME = 3000 * 10 * 60;
     _PAGE = 1;
     _LIMIT = 100;
     constructor(busquedaService, cacheManager) {
@@ -42,8 +42,16 @@ let BusquedaController = class BusquedaController {
     getByIrtra(params) {
         return this.busquedaService.getByIrtra(params.irtra);
     }
-    getByCedula(params) {
-        return this.busquedaService.getByCedula(params.cedula);
+    async getByCedula(params, query) {
+        const page = query.page || this._PAGE;
+        const limit = query.limit || this._LIMIT;
+        const key = `${params.cedula}-page:${page}`;
+        const cached = await this.cacheManager.get(key);
+        if (cached)
+            return cached;
+        const result = this.busquedaService.getByCedula(params.cedula, page, limit);
+        this.cacheManager.set(key, result, this._CACHETIME);
+        return result;
     }
     getByPasaporte(params) {
         return this.busquedaService.getByPasaporte(params.pasaporte);
@@ -169,6 +177,28 @@ let BusquedaController = class BusquedaController {
         this.cacheManager.set(key, result, this._CACHETIME);
         return result;
     }
+    async getByLastNameAndMunicipality(params, query) {
+        const page = query.page || this._PAGE;
+        const limit = query.limit || this._LIMIT;
+        const key = `${params.primer_apellido}-${params.municipio}-page:${page}`;
+        const cached = await this.cacheManager.get(key);
+        if (cached)
+            return cached;
+        const result = this.busquedaService.getLastNameAndMunicipality(params.primer_apellido, params.municipio, page, limit);
+        this.cacheManager.set(key, result, this._CACHETIME);
+        return result;
+    }
+    async getByLastNameAndWork(params, query) {
+        const page = query.page || this._PAGE;
+        const limit = query.limit || this._LIMIT;
+        const key = `${params.primer_apellido}-${params.razon_social}-page:${page}`;
+        const cached = await this.cacheManager.get(key);
+        if (cached)
+            return cached;
+        const result = await this.busquedaService.getLastNameAndWork(params.primer_apellido, params.razon_social, page, limit);
+        this.cacheManager.set(key, result, this._CACHETIME);
+        return result;
+    }
 };
 exports.BusquedaController = BusquedaController;
 __decorate([
@@ -207,9 +237,11 @@ __decorate([
     (0, swagger_2.DocGetByCedula)(),
     (0, common_1.Get)('cedula/:cedula'),
     __param(0, (0, common_1.Param)(new common_1.ValidationPipe())),
+    __param(1, (0, common_1.Query)(new common_1.ValidationPipe({ transform: true }))),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_1.CedulaParamDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [dto_1.CedulaParamDto,
+        pagination_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
 ], BusquedaController.prototype, "getByCedula", null);
 __decorate([
     (0, swagger_2.DocGetByPasaporte)(),
@@ -329,6 +361,26 @@ __decorate([
         pagination_dto_1.PaginationQueryDto]),
     __metadata("design:returntype", Promise)
 ], BusquedaController.prototype, "getBySurnameAndAddress", null);
+__decorate([
+    (0, swagger_2.DocGetByLastNameAndMunicipality)(),
+    (0, common_1.Get)('apellido-municipio/:primer_apellido/:municipio'),
+    __param(0, (0, common_1.Param)(new common_1.ValidationPipe())),
+    __param(1, (0, common_1.Query)(new common_1.ValidationPipe({ transform: true }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [dto_1.LastNameAndMunicipalityDto,
+        pagination_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
+], BusquedaController.prototype, "getByLastNameAndMunicipality", null);
+__decorate([
+    (0, swagger_2.DocGetByLastNameAndWork)(),
+    (0, common_1.Get)('apellido-trabajo/:primer_apellido/:razon_social'),
+    __param(0, (0, common_1.Param)(new common_1.ValidationPipe())),
+    __param(1, (0, common_1.Query)(new common_1.ValidationPipe({ transform: true }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [dto_1.LastNameAndWorkDto,
+        pagination_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
+], BusquedaController.prototype, "getByLastNameAndWork", null);
 exports.BusquedaController = BusquedaController = __decorate([
     (0, swagger_1.ApiTags)('busqueda'),
     (0, common_1.Controller)('busqueda'),

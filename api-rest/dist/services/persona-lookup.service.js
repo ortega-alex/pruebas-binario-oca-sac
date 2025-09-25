@@ -143,14 +143,52 @@ let PersonaLookupService = class PersonaLookupService {
     async getFindByFieldPagination(params, page, limit) {
         const skip = (page - 1) * limit;
         const queryParams = { ...params, lista_negra: false };
+        const telefonoRegex = params['telefonos.numero']?.['$regex'] ?? null;
+        const direccionTokens = params['direcciones.direccion_tokens']?.['$all'] ?? null;
+        const buscaPorTelefono = !!telefonoRegex;
+        const buscaPorDireccion = Array.isArray(direccionTokens) && direccionTokens.length > 0;
         const pipeline = [
             { $match: queryParams },
             {
                 $addFields: {
                     direccion_seleccionada: {
                         $cond: {
-                            if: { $isArray: '$direcciones' },
+                            if: buscaPorDireccion,
                             then: {
+                                $let: {
+                                    vars: {
+                                        dirMatch: {
+                                            $filter: {
+                                                input: '$direcciones',
+                                                as: 'dir',
+                                                cond: {
+                                                    $allElementsTrue: [
+                                                        {
+                                                            $map: {
+                                                                input: direccionTokens,
+                                                                as: 'tok',
+                                                                in: {
+                                                                    $in: [
+                                                                        '$$tok',
+                                                                        '$$dir.direccion_tokens'
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    },
+                                    in: {
+                                        $arrayElemAt: [
+                                            '$$dirMatch.direccion_completa',
+                                            0
+                                        ]
+                                    }
+                                }
+                            },
+                            else: {
                                 $let: {
                                     vars: {
                                         activeDir: {
@@ -168,14 +206,35 @@ let PersonaLookupService = class PersonaLookupService {
                                         ]
                                     }
                                 }
-                            },
-                            else: null
+                            }
                         }
                     },
                     telefono_seleccionado: {
                         $cond: {
-                            if: { $isArray: '$telefonos' },
+                            if: buscaPorTelefono,
                             then: {
+                                $let: {
+                                    vars: {
+                                        telMatch: {
+                                            $filter: {
+                                                input: '$telefonos',
+                                                as: 'tel',
+                                                cond: {
+                                                    $regexMatch: {
+                                                        input: '$$tel.numero',
+                                                        regex: telefonoRegex,
+                                                        options: 'i'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    in: {
+                                        $arrayElemAt: ['$$telMatch.numero', 0]
+                                    }
+                                }
+                            },
+                            else: {
                                 $let: {
                                     vars: {
                                         activeTel: {
@@ -190,8 +249,7 @@ let PersonaLookupService = class PersonaLookupService {
                                         $arrayElemAt: ['$$activeTel.numero', 0]
                                     }
                                 }
-                            },
-                            else: null
+                            }
                         }
                     }
                 }

@@ -11,3 +11,7 @@ export declare class SurnameAndAddressDto {
     segundo_apellido: string;
     direccion: string;
 }
+export declare class LastNameAndMunicipalityDto {
+    primer_apellido: string;
+    municipio: string;
+}

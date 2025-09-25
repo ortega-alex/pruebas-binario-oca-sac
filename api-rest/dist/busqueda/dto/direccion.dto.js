@@ -19,8 +19,8 @@ exports.DireccionDto = DireccionDto;
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La dirección no es válida' }),
     (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
-    (0, class_validator_1.MinLength)(10, {
-        message: 'La dirección debe tener al menos 10 caracteres'
+    (0, class_validator_1.MinLength)(5, {
+        message: 'La dirección debe tener al menos 5 caracteres'
     }),
     __metadata("design:type", String)
 ], DireccionDto.prototype, "direccion", void 0);

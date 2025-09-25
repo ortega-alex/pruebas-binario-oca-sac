@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocGetByLastNameAndAddress = DocGetByLastNameAndAddress;
 exports.DocGetBySecoundSurnameAndAddress = DocGetBySecoundSurnameAndAddress;
 exports.DocGetBySurnameAndAddress = DocGetBySurnameAndAddress;
+exports.DocGetByLastNameAndMunicipality = DocGetByLastNameAndMunicipality;
 const api_decoration_doc_1 = require("../../decorators/api-decoration.doc");
 const querys = [
     {
@@ -81,6 +82,27 @@ function DocGetBySurnameAndAddress() {
                 type: 'string',
                 required: true,
                 description: 'Direección de la persona'
+            }
+        ],
+        querys,
+        multiline: true
+    });
+}
+function DocGetByLastNameAndMunicipality() {
+    return (0, api_decoration_doc_1.getApiDecoration)({
+        sumary: 'Obtener datos de una persona por primer apellido y municipio',
+        params: [
+            {
+                name: 'primer_apellido',
+                type: 'string',
+                required: true,
+                description: 'Primer apellido de la persona'
+            },
+            {
+                name: 'municipio',
+                type: 'string',
+                required: true,
+                description: 'Municipio de la persona'
             }
         ],
         querys,

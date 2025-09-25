@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SurnameAndAddressDto = exports.SecondSurnameAndAddressDto = exports.LastNameAndAddressDto = void 0;
+exports.LastNameAndMunicipalityDto = exports.SurnameAndAddressDto = exports.SecondSurnameAndAddressDto = exports.LastNameAndAddressDto = void 0;
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class LastNameAndAddressDto {
@@ -28,7 +28,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La dirección no es válida' }),
     (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
-    (0, class_validator_1.MinLength)(10, {
+    (0, class_validator_1.MinLength)(5, {
         message: 'La dirección debe tener al menos 10 caracteres'
     }),
     __metadata("design:type", String)
@@ -49,7 +49,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La dirección no es válida' }),
     (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
-    (0, class_validator_1.MinLength)(10, {
+    (0, class_validator_1.MinLength)(5, {
         message: 'La dirección debe tener al menos 10 caracteres'
     }),
     __metadata("design:type", String)
@@ -79,9 +79,30 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsString)({ message: 'La dirección no es válida' }),
     (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
-    (0, class_validator_1.MinLength)(10, {
+    (0, class_validator_1.MinLength)(5, {
         message: 'La dirección debe tener al menos 10 caracteres'
     }),
     __metadata("design:type", String)
 ], SurnameAndAddressDto.prototype, "direccion", void 0);
+class LastNameAndMunicipalityDto {
+    primer_apellido;
+    municipio;
+}
+exports.LastNameAndMunicipalityDto = LastNameAndMunicipalityDto;
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'El primer apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
+    (0, class_validator_1.MinLength)(3, {
+        message: 'El primer apellido debe tener al menos 3 caracteres'
+    }),
+    __metadata("design:type", String)
+], LastNameAndMunicipalityDto.prototype, "primer_apellido", void 0);
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'El nombre del municipio no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
+    (0, class_validator_1.MinLength)(5, {
+        message: 'El municipio debe tener al menos 5 caracteres'
+    }),
+    __metadata("design:type", String)
+], LastNameAndMunicipalityDto.prototype, "municipio", void 0);
 //# sourceMappingURL=name-and-address.dto.js.map

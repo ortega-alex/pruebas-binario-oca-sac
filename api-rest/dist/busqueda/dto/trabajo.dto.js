@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TrabajoDto = void 0;
+exports.LastNameAndWorkDto = exports.TrabajoDto = void 0;
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class TrabajoDto {
@@ -24,4 +24,25 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], TrabajoDto.prototype, "razon_social", void 0);
+class LastNameAndWorkDto {
+    primer_apellido;
+    razon_social;
+}
+exports.LastNameAndWorkDto = LastNameAndWorkDto;
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'El primer apellido no es válido' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
+    (0, class_validator_1.MinLength)(3, {
+        message: 'El primer apellido debe tener al menos 3 caracteres'
+    }),
+    __metadata("design:type", String)
+], LastNameAndWorkDto.prototype, "primer_apellido", void 0);
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'La razón social no puede estar vacía' }),
+    (0, class_transformer_1.Transform)(({ value }) => value.toLowerCase().trim()),
+    (0, class_validator_1.MinLength)(3, {
+        message: 'La razón social debe tener al menos 3 caracteres'
+    }),
+    __metadata("design:type", String)
+], LastNameAndWorkDto.prototype, "razon_social", void 0);
 //# sourceMappingURL=trabajo.dto.js.map

@@ -16,6 +16,7 @@ const editar_module_1 = require("./editar/editar.module");
 const expiration_middleware_1 = require("./middleware/expiration/expiration.middleware");
 const Persona_1 = require("./schemas/Persona");
 const persona_lookup_service_1 = require("./services/persona-lookup.service");
+console.log(envs_1.envs.MONGO_URI || 'mongodb://192.168.5.3:27017/centralizador');
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(expiration_middleware_1.ExpirationMiddleware).forRoutes('*');

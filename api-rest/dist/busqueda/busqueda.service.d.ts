@@ -9,7 +9,7 @@ export declare class BusquedaService {
     getByNit(nit: string): Promise<Persona | null>;
     getByIgss(igss: string): Promise<Persona | null>;
     getByIrtra(irtra: string): Promise<Persona | null>;
-    getByCedula(cedula: string): Promise<Persona | null>;
+    getByCedula(cedula: string, page: number, limit: number): Promise<ReponsePagination>;
     getByPasaporte(pasaporte: string): Promise<Persona | null>;
     getByFullName(nombre_completo: string, page: number, limit: number): Promise<ReponsePagination>;
     getByFirstNameAndLastName(primer_nombre: string, primer_apellido: string, page: number, limit: number): Promise<ReponsePagination>;
@@ -22,4 +22,6 @@ export declare class BusquedaService {
     getByLastNameAndAddress(primer_apellido: string, direccion: string, page: number, limit: number): Promise<ReponsePagination>;
     getBySecondSurnameAndAddress(segundo_apellido: string, direccion: string, page: number, limit: number): Promise<ReponsePagination>;
     getBySurnameAndAddress(primer_apellido: string, segundo_apellido: string, direccion: string, page: number, limit: number): Promise<ReponsePagination>;
+    getLastNameAndMunicipality(primer_apellido: string, municipio: string, page: number, limit: number): Promise<ReponsePagination>;
+    getLastNameAndWork(primer_apellido: string, razon_social: string, page: number, limit: number): Promise<ReponsePagination>;
 }

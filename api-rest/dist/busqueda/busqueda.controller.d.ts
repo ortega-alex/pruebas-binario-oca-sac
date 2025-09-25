@@ -1,7 +1,7 @@
 import { Cache } from '@nestjs/cache-manager';
-import { BusquedaService } from './busqueda.service';
-import { AppellidoCasadaDto, CedulaParamDto, CorreoDto, DireccionDto, DpiParamDto, IgssParamDto, IrtraParamDto, LastNameAndAddressDto, NitParamDto, NombreApellidoDto, NombreCompletoDto, PasaporteParamDto, PhoneNumberDto, PrimerApellidoSegundoApellidoDto, SecondSurnameAndAddressDto, SurnameAndAddressDto, TrabajoDto } from './dto';
 import { PaginationQueryDto } from 'src/dto/pagination.dto';
+import { BusquedaService } from './busqueda.service';
+import { AppellidoCasadaDto, CedulaParamDto, CorreoDto, DireccionDto, DpiParamDto, IgssParamDto, IrtraParamDto, LastNameAndAddressDto, LastNameAndMunicipalityDto, LastNameAndWorkDto, NitParamDto, NombreApellidoDto, NombreCompletoDto, PasaporteParamDto, PhoneNumberDto, PrimerApellidoSegundoApellidoDto, SecondSurnameAndAddressDto, SurnameAndAddressDto, TrabajoDto } from './dto';
 export declare class BusquedaController {
     private readonly busquedaService;
     private cacheManager;
@@ -13,7 +13,7 @@ export declare class BusquedaController {
     getByNit(params: NitParamDto): Promise<import("../schemas/Persona").Persona | null>;
     getByIgss(params: IgssParamDto): Promise<import("../schemas/Persona").Persona | null>;
     getByIrtra(params: IrtraParamDto): Promise<import("../schemas/Persona").Persona | null>;
-    getByCedula(params: CedulaParamDto): Promise<import("../schemas/Persona").Persona | null>;
+    getByCedula(params: CedulaParamDto, query: PaginationQueryDto): Promise<{}>;
     getByPasaporte(params: PasaporteParamDto): Promise<import("../schemas/Persona").Persona | null>;
     getByNombreCompleto(params: NombreCompletoDto, query: PaginationQueryDto): Promise<{}>;
     getByPrimerNombrePrimerApellido(params: NombreApellidoDto, query: PaginationQueryDto): Promise<{}>;
@@ -26,4 +26,6 @@ export declare class BusquedaController {
     getByLastNameAndAddress(params: LastNameAndAddressDto, query: PaginationQueryDto): Promise<{}>;
     getBySecondSurnameAndAddress(params: SecondSurnameAndAddressDto, query: PaginationQueryDto): Promise<{}>;
     getBySurnameAndAddress(params: SurnameAndAddressDto, query: PaginationQueryDto): Promise<{}>;
+    getByLastNameAndMunicipality(params: LastNameAndMunicipalityDto, query: PaginationQueryDto): Promise<{}>;
+    getByLastNameAndWork(params: LastNameAndWorkDto, query: PaginationQueryDto): Promise<{}>;
 }

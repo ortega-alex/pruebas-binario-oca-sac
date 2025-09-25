@@ -47,7 +47,7 @@ class IrtraParamDto {
 exports.IrtraParamDto = IrtraParamDto;
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'El número no puede estar vacío' }),
-    (0, class_validator_1.MinLength)(6, { message: 'El número debe tener al menos 6 dígitos' }),
+    (0, class_validator_1.MinLength)(4, { message: 'El número debe tener al menos 4 dígitos' }),
     __metadata("design:type", String)
 ], IrtraParamDto.prototype, "irtra", void 0);
 class CedulaParamDto {

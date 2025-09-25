@@ -4,6 +4,7 @@ export declare class Direccion {
     uuid: string;
     direccion_completa: string;
     direccion_unicode?: string;
+    direccion_tokens: string[];
     municipio?: string;
     departamento?: string;
     colonia?: string;
