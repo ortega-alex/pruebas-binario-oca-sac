@@ -13,6 +13,13 @@ export declare class Trabajo {
     tabla?: string;
     activo: boolean;
     fecha_ingreso_oca?: Date;
+    correo_empresa?: string;
+    correo_rrhh?: string;
+    contacto?: string;
+    telefono_empresa?: string;
+    telefono_contacto?: string;
+    nombre_comercial?: string;
+    no_patrono?: string;
 }
 export declare const TrabajoSchema: import("mongoose").Schema<Trabajo, import("mongoose").Model<Trabajo, any, any, any, import("mongoose").Document<unknown, any, Trabajo, any> & Trabajo & {
     _id: import("mongoose").Types.ObjectId;

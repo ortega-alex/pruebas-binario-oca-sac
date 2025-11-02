@@ -12,6 +12,7 @@ import { Vehiculo } from './Vehiculo';
 import { Referencia } from './Referencia';
 import { RelacionPersona } from './RelacionPersona';
 import { Fuente } from './Fuente';
+import { HistorialOca } from './HistorialOca';
 export type PersonaDocument = HydratedDocument<Persona>;
 export declare class Persona {
     dpi: string;
@@ -51,6 +52,7 @@ export declare class Persona {
     referencias: Referencia[];
     relaciones: RelacionPersona[];
     fuentes: Fuente[];
+    historial_oca: HistorialOca[];
     actualizado_global: Date;
     lista_negra: boolean;
     relaciones_buscadas: boolean;

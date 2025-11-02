@@ -25,6 +25,7 @@ const Referencia_1 = require("./Referencia");
 const RelacionPersona_1 = require("./RelacionPersona");
 const Fuente_1 = require("./Fuente");
 const swagger_1 = require("@nestjs/swagger");
+const HistorialOca_1 = require("./HistorialOca");
 let Persona = class Persona {
     dpi;
     nit;
@@ -63,6 +64,7 @@ let Persona = class Persona {
     referencias;
     relaciones;
     fuentes;
+    historial_oca;
     actualizado_global;
     lista_negra;
     relaciones_buscadas;
@@ -253,6 +255,11 @@ __decorate([
     (0, mongoose_1.Prop)([{ type: Fuente_1.FuenteSchema }]),
     __metadata("design:type", Array)
 ], Persona.prototype, "fuentes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [HistorialOca_1.HistorialOca] }),
+    (0, mongoose_1.Prop)([{ type: HistorialOca_1.HistorialOcaSchema }]),
+    __metadata("design:type", Array)
+], Persona.prototype, "historial_oca", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, mongoose_1.Prop)({ default: Date.now }),

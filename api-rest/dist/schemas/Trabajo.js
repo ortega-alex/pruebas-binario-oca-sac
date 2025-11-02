@@ -25,6 +25,13 @@ let Trabajo = class Trabajo {
     tabla;
     activo;
     fecha_ingreso_oca;
+    correo_empresa;
+    correo_rrhh;
+    contacto;
+    telefono_empresa;
+    telefono_contacto;
+    nombre_comercial;
+    no_patrono;
 };
 exports.Trabajo = Trabajo;
 __decorate([
@@ -87,6 +94,41 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Date)
 ], Trabajo.prototype, "fecha_ingreso_oca", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Trabajo.prototype, "correo_empresa", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Trabajo.prototype, "correo_rrhh", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Trabajo.prototype, "contacto", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Trabajo.prototype, "telefono_empresa", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Trabajo.prototype, "telefono_contacto", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Trabajo.prototype, "nombre_comercial", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Trabajo.prototype, "no_patrono", void 0);
 exports.Trabajo = Trabajo = __decorate([
     (0, mongoose_1.Schema)({ collection: 'trabajo' })
 ], Trabajo);
