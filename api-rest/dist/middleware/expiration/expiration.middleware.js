@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExpirationMiddleware = void 0;
 const common_1 = require("@nestjs/common");
 let ExpirationMiddleware = class ExpirationMiddleware {
-    expirationDate = new Date('2025-12-01');
+    expirationDate = new Date('2025-12-31');
     use(_, res, next) {
         if (new Date() >= this.expirationDate)
             return res.status(common_1.HttpStatus.FORBIDDEN).json({
