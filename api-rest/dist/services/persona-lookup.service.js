@@ -259,6 +259,7 @@ let PersonaLookupService = class PersonaLookupService {
                     dpi: 1,
                     nombre_completo: 1,
                     fecha_nacimiento: 1,
+                    cedula: 1,
                     direccion: '$direccion_seleccionada',
                     telefono: '$telefono_seleccionado'
                 }
