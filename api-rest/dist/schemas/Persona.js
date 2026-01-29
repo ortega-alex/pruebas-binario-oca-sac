@@ -292,6 +292,8 @@ exports.PersonaSchema.index({ segundo_apellido: 1 });
 exports.PersonaSchema.index({ apellido_casada: 1 });
 exports.PersonaSchema.index({ nombre_completo: 1 });
 exports.PersonaSchema.index({ lista_negra: 1 });
+exports.PersonaSchema.index({ madre: 1 });
+exports.PersonaSchema.index({ padre: 1 });
 exports.PersonaSchema.index({ 'telefonos.numero': 1 });
 exports.PersonaSchema.index({ 'telefonos.formato_original': 1 });
 exports.PersonaSchema.index({ 'correos.correo': 1 });

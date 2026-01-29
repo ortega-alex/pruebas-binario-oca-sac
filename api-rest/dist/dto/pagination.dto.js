@@ -14,7 +14,7 @@ const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class PaginationQueryDto {
     page = 1;
-    limit = 100;
+    limit = 500;
 }
 exports.PaginationQueryDto = PaginationQueryDto;
 __decorate([

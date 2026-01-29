@@ -10,16 +10,15 @@ exports.AppModule = void 0;
 const cache_manager_1 = require("@nestjs/cache-manager");
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const busqueda_module_1 = require("./busqueda/busqueda.module");
 const envs_1 = require("./config/envs");
-const editar_module_1 = require("./editar/editar.module");
-const expiration_middleware_1 = require("./middleware/expiration/expiration.middleware");
+const busqueda_module_1 = require("./features/busqueda/busqueda.module");
+const editar_module_1 = require("./features/editar/editar.module");
 const Persona_1 = require("./schemas/Persona");
 const persona_lookup_service_1 = require("./services/persona-lookup.service");
-console.log(envs_1.envs.MONGO_URI || 'mongodb://192.168.5.3:27017/centralizador');
+const response_time_middleware_1 = require("./middleware/response-time/response-time.middleware");
 let AppModule = class AppModule {
     configure(consumer) {
-        consumer.apply(expiration_middleware_1.ExpirationMiddleware).forRoutes('*');
+        consumer.apply(response_time_middleware_1.ResponseTimeMiddleware).forRoutes('*');
     }
 };
 exports.AppModule = AppModule;

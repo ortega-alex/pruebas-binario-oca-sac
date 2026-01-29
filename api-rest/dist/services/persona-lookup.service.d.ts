@@ -8,4 +8,8 @@ export declare class PersonaLookupService {
     getFindByFieldPagination(params: {
         [key: string]: any;
     }, page: number, limit: number): Promise<ReponsePagination>;
+    private busquedaPorRelacionesExistentes;
+    private busquedaPorCamposDeTexto;
+    private determinarTipoRelacion;
+    private actualizarRelacion;
 }

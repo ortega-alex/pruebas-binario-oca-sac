@@ -35,7 +35,6 @@ let PersonaLookupService = class PersonaLookupService {
         })
             .lean();
         if (persona && buscar_relacion && !persona.relaciones_buscadas) {
-            const padres = persona.relaciones.filter(r => r.tipo_relacion === 'padre' || r.tipo_relacion === 'madre');
             const nuevasRelacionesParaPersonaActual = [];
             const hermanosYaProcesadosIds = new Set();
             hermanosYaProcesadosIds.add(persona._id.toString());
@@ -51,62 +50,12 @@ let PersonaLookupService = class PersonaLookupService {
                     hermanosYaProcesadosIds.add(r.persona._id.toString());
                 }
             });
-            for (const relacionPadres of padres) {
-                const hijosDelPadrePotenciales = await this.personaModel
-                    .find({
-                    'relaciones.persona': relacionPadres.persona._id,
-                    _id: { $ne: persona._id },
-                    lista_negra: false
-                })
-                    .select('dpi primer_apellido segundo_apellido genero relaciones')
-                    .lean();
-                for (const posibleHermano of hijosDelPadrePotenciales) {
-                    const esHijoDeEstePadre = posibleHermano.relaciones?.some((rel) => ['padre', 'madre'].includes(rel.tipo_relacion));
-                    if (!esHijoDeEstePadre)
-                        continue;
-                    if (hermanosYaProcesadosIds.has(posibleHermano._id.toString()))
-                        continue;
-                    let tipo_relacion_hacia_hermano;
-                    const p1Ap1 = persona.primer_apellido;
-                    const p1Ap2 = persona.segundo_apellido;
-                    const p2Ap1 = posibleHermano.primer_apellido;
-                    const p2Ap2 = posibleHermano.segundo_apellido;
-                    const tieneMismoPrimerApellido = p1Ap1 && p2Ap1 && p1Ap1 === p2Ap1;
-                    const tieneMismoSegundoApellido = p1Ap2 && p2Ap2 && p1Ap2 === p2Ap2;
-                    if (tieneMismoPrimerApellido && tieneMismoSegundoApellido)
-                        tipo_relacion_hacia_hermano =
-                            !posibleHermano.genero ||
-                                posibleHermano.genero === 'M'
-                                ? 'hermano'
-                                : 'hermana';
-                    else if (tieneMismoPrimerApellido ||
-                        tieneMismoSegundoApellido)
-                        tipo_relacion_hacia_hermano =
-                            !posibleHermano.genero ||
-                                posibleHermano.genero === 'M'
-                                ? 'hermanastro'
-                                : 'hermanastra';
-                    if (tipo_relacion_hacia_hermano) {
-                        nuevasRelacionesParaPersonaActual.push({
-                            persona: posibleHermano._id,
-                            tipo_relacion: tipo_relacion_hacia_hermano,
-                            observacion: `Relación de ${tipo_relacion_hacia_hermano} generada automáticamente`
-                        });
-                        hermanosYaProcesadosIds.add(posibleHermano._id.toString());
-                        const relacion_logica_inversa = RelacionPersona_1.RELACION_LOGICA[tipo_relacion_hacia_hermano][!persona.genero || persona.genero === 'M'
-                            ? 0
-                            : 1];
-                        await this.personaModel.findByIdAndUpdate(posibleHermano._id, {
-                            $push: {
-                                relaciones: {
-                                    persona: persona._id,
-                                    tipo_relacion: relacion_logica_inversa,
-                                    observacion: `Relación de ${relacion_logica_inversa} creada automáticamente`
-                                }
-                            }
-                        }, { new: true, runValidators: true });
-                    }
-                }
+            const padres = persona.relaciones.filter(r => r.tipo_relacion === 'padre' || r.tipo_relacion === 'madre');
+            if (padres.length > 0) {
+                await this.busquedaPorRelacionesExistentes(persona, padres, nuevasRelacionesParaPersonaActual, hermanosYaProcesadosIds);
+            }
+            if (persona.padre || persona.madre) {
+                await this.busquedaPorCamposDeTexto(persona, nuevasRelacionesParaPersonaActual, hermanosYaProcesadosIds);
             }
             await this.personaModel.findByIdAndUpdate(persona._id, {
                 $set: { relaciones_buscadas: true },
@@ -144,7 +93,7 @@ let PersonaLookupService = class PersonaLookupService {
         const skip = (page - 1) * limit;
         const queryParams = { ...params, lista_negra: false };
         const telefonoRegex = params['telefonos.numero']?.['$regex'] ?? null;
-        const direccionTokens = params['direcciones.direccion_tokens']?.['$all'] ?? null;
+        const direccionTokens = params['direcciones']?.['$elemMatch']?.['direccion_tokens']?.['$all'] ?? null;
         const buscaPorTelefono = !!telefonoRegex;
         const buscaPorDireccion = Array.isArray(direccionTokens) && direccionTokens.length > 0;
         const pipeline = [
@@ -284,6 +233,102 @@ let PersonaLookupService = class PersonaLookupService {
             limit,
             has_next_page: page * limit < total
         };
+    }
+    async busquedaPorRelacionesExistentes(persona, padres, nuevasRelacionesParaPersonaActual, hermanosYaProcesadosIds) {
+        for (const relacionPadres of padres) {
+            const hijosDelPadrePotenciales = await this.personaModel
+                .find({
+                'relaciones.persona': relacionPadres.persona._id,
+                _id: { $ne: persona._id },
+                lista_negra: false
+            })
+                .select('dpi primer_apellido segundo_apellido genero relaciones')
+                .lean();
+            for (const posibleHermano of hijosDelPadrePotenciales) {
+                const esHijoDeEstePadre = posibleHermano.relaciones?.some((rel) => ['padre', 'madre'].includes(rel.tipo_relacion));
+                if (!esHijoDeEstePadre)
+                    continue;
+                if (hermanosYaProcesadosIds.has(posibleHermano._id.toString()))
+                    continue;
+                const tipo_relacion = this.determinarTipoRelacion(persona, posibleHermano);
+                if (tipo_relacion)
+                    await this.actualizarRelacion(tipo_relacion, nuevasRelacionesParaPersonaActual, hermanosYaProcesadosIds, persona, posibleHermano);
+            }
+        }
+    }
+    async busquedaPorCamposDeTexto(persona, nuevasRelacionesParaPersonaActual, hermanosYaProcesadosIds) {
+        const condiciones = [];
+        if (persona.padre)
+            condiciones.push({ padre: persona.padre });
+        if (persona.madre)
+            condiciones.push({ madre: persona.madre });
+        if (condiciones.length <= 0)
+            return;
+        const posiblesHermanos = await this.personaModel
+            .find({
+            $and: [
+                {
+                    $or: condiciones
+                },
+                { _id: { $ne: persona._id } },
+                { lista_negra: false }
+            ]
+        })
+            .select('dpi primer_apellido segundo_apellido genero padre madre')
+            .lean();
+        for (const posibleHermano of posiblesHermanos) {
+            const compartenPadre = persona.padre &&
+                posibleHermano.padre &&
+                persona.padre === posibleHermano.padre;
+            const compartenMadre = persona.madre &&
+                posibleHermano.madre &&
+                persona.madre === posibleHermano.madre;
+            if (!compartenPadre || !compartenMadre)
+                continue;
+            if (hermanosYaProcesadosIds.has(posibleHermano._id.toString()))
+                continue;
+            const tipo_relacion = this.determinarTipoRelacion(persona, posibleHermano);
+            if (tipo_relacion)
+                await this.actualizarRelacion(tipo_relacion, nuevasRelacionesParaPersonaActual, hermanosYaProcesadosIds, persona, posibleHermano);
+        }
+    }
+    determinarTipoRelacion(persona, posibleHermano) {
+        const p1Ap1 = persona.primer_apellido;
+        const p1Ap2 = persona.segundo_apellido;
+        const p2Ap1 = posibleHermano.primer_apellido;
+        const p2Ap2 = posibleHermano.segundo_apellido;
+        let tipo_relacion = null;
+        const tieneMismoPrimerApellido = p1Ap1 && p2Ap1 && p1Ap1 === p2Ap1;
+        const tieneMismoSegundoApellido = p1Ap2 && p2Ap2 && p1Ap2 === p2Ap2;
+        if (tieneMismoPrimerApellido && tieneMismoSegundoApellido)
+            tipo_relacion =
+                !posibleHermano.genero || posibleHermano.genero === 'M'
+                    ? 'hermano'
+                    : 'hermana';
+        else if (tieneMismoPrimerApellido || tieneMismoSegundoApellido)
+            tipo_relacion =
+                !posibleHermano.genero || posibleHermano.genero === 'M'
+                    ? 'hermanastro'
+                    : 'hermanastra';
+        return tipo_relacion;
+    }
+    async actualizarRelacion(tipo_relacion, nuevasRelacionesParaPersonaActual, hermanosYaProcesadosIds, persona, posibleHermano) {
+        nuevasRelacionesParaPersonaActual.push({
+            persona: posibleHermano._id,
+            tipo_relacion: tipo_relacion,
+            observacion: `Relación de ${tipo_relacion} generada automáticamente`
+        });
+        hermanosYaProcesadosIds.add(posibleHermano._id.toString());
+        const relacion_logica_inversa = RelacionPersona_1.RELACION_LOGICA[tipo_relacion][!persona.genero || persona.genero === 'M' ? 0 : 1];
+        await this.personaModel.findByIdAndUpdate(posibleHermano._id, {
+            $push: {
+                relaciones: {
+                    persona: persona._id,
+                    tipo_relacion: relacion_logica_inversa,
+                    observacion: `Relación de ${relacion_logica_inversa} creada automáticamente`
+                }
+            }
+        }, { new: true, runValidators: true });
     }
 };
 exports.PersonaLookupService = PersonaLookupService;

@@ -6,6 +6,8 @@ const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const all_exceptions_filter_1 = require("./filters/all-exceptions.filter");
 async function bootstrap() {
+    const logger = new common_1.Logger('Main-api-rest');
+    const PORT = process.env.PORT ?? 3000;
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalFilters(new all_exceptions_filter_1.AllExceptionsFilter());
     app.setGlobalPrefix('api');
@@ -22,7 +24,7 @@ async function bootstrap() {
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, document);
     app.enableCors();
-    await app.listen(process.env.PORT ?? 3000);
+    await app.listen(PORT, () => logger.log(`Listening on port ${PORT}`));
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
