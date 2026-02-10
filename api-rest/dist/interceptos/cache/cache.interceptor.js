@@ -20,7 +20,7 @@ let CacheInterceptor = class CacheInterceptor {
     cacheManager;
     _CACHETIME = 3000 * 10 * 60;
     _PAGE = 1;
-    _LIMIT = 100;
+    _LIMIT = 500;
     constructor(cacheManager) {
         this.cacheManager = cacheManager;
     }

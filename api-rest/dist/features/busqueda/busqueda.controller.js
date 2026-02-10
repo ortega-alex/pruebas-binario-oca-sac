@@ -23,7 +23,7 @@ const swagger_2 = require("./swagger");
 let BusquedaController = class BusquedaController {
     busquedaService;
     _PAGE = 1;
-    _LIMIT = 100;
+    _LIMIT = 500;
     constructor(busquedaService) {
         this.busquedaService = busquedaService;
     }
